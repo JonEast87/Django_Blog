@@ -21,10 +21,10 @@
 
 <br/>
 {% if user.is_authenticated %}
-	<a href="{% url 'update-post' post.pk %}" class="btn btn-primary">Edit</a>
-	<a href="{% url 'delete-post' post.pk %}"><button class="btn btn-warning">Delete</button></a>
+	<a href="{% url 'update-post' post.pk %}" class="btn btn-primary">EDIT</a>
+	<a href="{% url 'delete-post' post.pk %}"><button class="btn btn-warning">DELETE</button></a>
 {% endif %}
-<a href="{% url 'home' %} " class="btn btn-secondary">Back</a>
+<a href="{% url 'home' %} " class="btn btn-secondary">BACK</a>
 
 <br />
 <br />
