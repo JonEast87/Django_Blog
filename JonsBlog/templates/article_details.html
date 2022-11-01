@@ -15,6 +15,7 @@
 <br/>
 
 <a href="{% url 'update-post' post.pk %}" class="btn btn-primary">Edit</a>
+<a href="{% url 'delete-post' post.pk %}"><button class="btn btn-warning">Delete</button></a>
 <a href="{% url 'home' %} " class="btn btn-secondary">Back</a>
 
 {% endblock %}
