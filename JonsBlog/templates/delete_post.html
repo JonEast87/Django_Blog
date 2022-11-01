@@ -4,6 +4,7 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 <h1>Delete Post...</h1>
 
 <br />
@@ -19,5 +20,13 @@
 		<button class="btn btn-warning">DELETE</button>
 	</form>
 </div>
+
+{% else %}
+
+<div class="">
+	<p>Please register and/or login, so you can delete posts.</p>
+</div>
+
+{% endif %}
 
 {% endblock %}
