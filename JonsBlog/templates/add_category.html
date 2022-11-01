@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Create A New Blog Post{% endblock %}
+{% block title %}Create A New Blog Category{% endblock %}
 
 {% block content %}
 
 {% if user.is_authenticated %}
 
-<h1>Add Post...</h1>
+<h1>Add Category...</h1>
 
 <br />
 <br />
@@ -22,7 +22,7 @@
 {% else %}
 
 <div class="">
-	<p>Please register and/or login, so you can create posts.</p>
+	<p>Please register and/or login, so you can create categories.</p>
 </div>
 
 {% endif %}
