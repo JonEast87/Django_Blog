@@ -49,12 +49,35 @@
 				</li>
 
 			{% endif %}
-		  </ul>
+
+			<!-- Category Menu HTML Nav and Function Logic -->
+			{% if cat_menu %}
+			  <li class="nav-item dropdown">
+          		<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            		Categories
+          		</a>
+				  <ul class="dropdown-menu">
+					{% for item in cat_menu %}
+						<li><a class="dropdown-item"
+							   href="{% url 'category' item|slugify %}">{{ item }}</a></li>
+					{% endfor %}
+<!--					<li><hr class="dropdown-divider"></li>-->
+				  </ul>
+			  </li>
+            {% else %}
+                <li class="nav-item">
+				  <a class="nav-link active" aria-current="page" href="{% url 'category-list' %}">
+                    Category List
+				  </a>
+				</li>
+			{% endif %}
+          </ul>
 		</div>
 	  </div>
-
 	</nav>
+
     <br />
+
     <div class="container">
         {% block content %}
 

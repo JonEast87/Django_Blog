@@ -11,18 +11,36 @@ class HomeView(ListView):
     template_name = 'home.html'
     ordering = ['-publication_time']
 
+    # retrieves the data needed to generate a dictionary for the categories dropdown on home.html
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
+
 
 # using function for this since retrieving the request is simpler for the function than a class
 def CategoryView(req, cats):
-    # db query fpr categories to store
+    # db query for categories to store
     category_posts = Post.objects.filter(category=cats.replace('-', ' '))
     return render(req, 'categories.html', {'cats': cats.replace('-', ' '),
                                            'category_posts': category_posts})
+def CategoryListView(req):
+    # db query for categories to store
+    category_menu_list = Category.objects.all()
+    return render(req, 'category_list.html', {'category_menu_list': category_menu_list})
 
 
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_details.html'
+
+    # retrieves the data needed to generate a dictionary for the categories dropdown on home.html
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
 
 
 class AddPostView(CreateView):
