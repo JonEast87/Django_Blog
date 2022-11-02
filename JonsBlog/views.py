@@ -12,6 +12,12 @@ class HomeView(ListView):
     ordering = ['-publication_time']
 
 
+# using function for this since retrieving the request is simpler for the function than a class
+def CategoryView(req, cats):
+    category_posts = Post.objects.filter(category=cats)
+    return render(req, 'categories.html', {'cats': cats, 'category_posts': category_posts})
+
+
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_details.html'
