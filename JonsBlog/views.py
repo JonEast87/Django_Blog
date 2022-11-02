@@ -25,6 +25,8 @@ def CategoryView(req, cats):
     category_posts = Post.objects.filter(category=cats.replace('-', ' '))
     return render(req, 'categories.html', {'cats': cats.replace('-', ' '),
                                            'category_posts': category_posts})
+
+
 def CategoryListView(req):
     # db query for categories to store
     category_menu_list = Category.objects.all()
