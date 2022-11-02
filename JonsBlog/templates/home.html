@@ -17,10 +17,12 @@
             - {{ post.author.first_name }}
             {{ post.author.last_name }}
 			{% if user.is_authenticated %}
+                {% if user.id == post.author.id %}
 				- <small>
 					<a href="{% url 'update-post' post.pk %}">(Edit)</a>
 					<a href="{% url 'delete-post' post.pk %}">(Delete)</a>
 				</small>
+                {% endif %}
 			{% endif %}
 			<br />
 
