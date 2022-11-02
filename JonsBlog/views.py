@@ -14,8 +14,10 @@ class HomeView(ListView):
 
 # using function for this since retrieving the request is simpler for the function than a class
 def CategoryView(req, cats):
-    category_posts = Post.objects.filter(category=cats)
-    return render(req, 'categories.html', {'cats': cats, 'category_posts': category_posts})
+    # db query fpr categories to store
+    category_posts = Post.objects.filter(category=cats.replace('-', ' '))
+    return render(req, 'categories.html', {'cats': cats.replace('-', ' '),
+                                           'category_posts': category_posts})
 
 
 class ArticleDetailView(DetailView):

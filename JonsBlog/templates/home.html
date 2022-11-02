@@ -11,7 +11,7 @@
 				{{ post.title }}
 			</a>
 			-
-			<a href="{% url 'category' post.category %}">
+			<a href="{% url 'category' post.category|slugify %}">
 				{{ post.category }}
 			</a>
             - {{ post.author.first_name }}
