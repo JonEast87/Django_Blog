@@ -24,6 +24,7 @@ class Post(models.Model):
     publication_date = models.DateField(auto_now_add=True)
     publication_time = models.TimeField(auto_now_add=True)
     category = models.CharField(max_length=255, default="general")
+    snippet = models.CharField(max_length=255)
     likes = models.ManyToManyField(User, related_name='blog_posts')
 
     def total_likes(self):
