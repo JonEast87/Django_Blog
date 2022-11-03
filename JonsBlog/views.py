@@ -25,7 +25,14 @@ def LikeView(req, pk):
     # This creates a form and submits the post id to find the matching post id
     # if found it saves it to the table, if not it returns a 404 error
     post = get_object_or_404(Post, id=req.POST.get('post_id'))
-    post.likes.add(req.user)
+    liked = False
+    if post.likes.filter(id=req.user.id).exists():
+        post.likes.remove(req.user)
+        liked = False
+    else:
+        post.likes.add(req.user)
+        liked = True
+
     return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
 
 
@@ -55,8 +62,14 @@ class ArticleDetailView(DetailView):
         # grabs posts from post_table and assign the returned data to getLikes
         getLikes = get_object_or_404(Post, id=self.kwargs['pk'])
         total_likes = getLikes.total_likes()
+
+        liked = False
+        if getLikes.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
         context["cat_menu"] = cat_menu
         context["total_likes"] = total_likes
+        context["liked"] = liked
         return context
 
 
