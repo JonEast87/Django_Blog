@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -18,7 +19,8 @@ class Post(models.Model):
     title = models.CharField(max_length=255, default="Jon's Blog")
     title_tag = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
+    body = RichTextField(blank=True, null=True)
+    # body = models.TextField()
     publication_date = models.DateField(auto_now_add=True)
     publication_time = models.TimeField(auto_now_add=True)
     category = models.CharField(max_length=255, default="general")
