@@ -1,7 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
-from datetime import datetime, date
 
 
 class Category(models.Model):
@@ -23,6 +22,10 @@ class Post(models.Model):
     publication_date = models.DateField(auto_now_add=True)
     publication_time = models.TimeField(auto_now_add=True)
     category = models.CharField(max_length=255, default="general")
+    likes = models.ManyToManyField(User, related_name='blog_posts')
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)

@@ -21,19 +21,26 @@
 
     <br/>
 {% if user.is_authenticated %}
-    {% if user.id == post.author.id %}
+{% if user.id == post.author.id %}
         <a href="{% url 'update-post' post.pk %}" class="btn btn-primary">
             EDIT
         </a>
         <a href="{% url 'delete-post' post.pk %}" class="btn btn-warning">
             DELETE
         </a>
-    {% endif %}
+{% endif %}
 {% endif %}
 <a href="{% url 'home' %} " class="btn btn-secondary">BACK</a>
 
-<br />
-<br />
-<br />
+<br/>
+<br/>
+<br/>
+<hr>
+<form action="{% url 'like-post' post.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-secondary btn-small">
+        LIKE
+    </button> - {{ total_likes }} | Likes
+</form>
 
 {% endblock %}
