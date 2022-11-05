@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ post.title_tag }}{% endblock %}
 
@@ -43,12 +44,14 @@
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-2">
-      <img src="{{ post.author.profile.profile_image.url }}" class="img-fluid rounded-start"
+      <img src="{{ post.author.profile.profile_image.url }}"
+           class="img-fluid rounded-start"
            alt="Photo of Jon Eastin">
     </div>
     <div class="col-md-10">
       <div class="card-body">
           <p class="small text-muted">
+              <a href="{% url 'show_profile' post.author.profile.id %}">Profile</a> ||
               <a href="{{ post.author.profile.github }}">GitHub</a> ||
               <a href="{{ post.author.profile.instagram }}">Instagram</a> ||
               <a href="{{ post.author.profile.linkedin }}">LinkedIn</a> ||

@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from .views import UserRegisterView, UserEditView, PasswordsChangeView
+from .views import UserRegisterView, UserEditView, PasswordsChangeView, ShowProfilePageView
 
 # Using class based url
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('password/', PasswordsChangeView.as_view(
         template_name='registration/change-password.html')),
     path('password_success', views.password_success, name="password_success"),
+    path('<int:pk>/profile/', ShowProfilePageView.as_view(), name="show_profile"),
 ]
