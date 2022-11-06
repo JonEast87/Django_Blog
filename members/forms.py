@@ -22,30 +22,32 @@ class SignupForm(UserCreationForm):
         self.fields['password2'].widget.attrs.update({'class': 'form-control'})
 
 
-class EditProfileForm(UserChangeForm):
-    bio = forms.Textarea(attrs={'class': 'form-control'})
-    # profile_image = forms.ImageField(widget=forms.ImageField(attrs={'class': 'form-control'}))
-    github = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'form-control'}))
-    instagram = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'form-control'}))
-    linkedin = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'form-control'}))
-    twitter = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'form-control'}))
-
+class CreateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio', 'github', 'instagram', 'linkedin', 'twitter']
+        fields = ('bio', 'profile_image', 'github', 'instagram', 'linkedin', 'twitter')
 
-    def __init__(self, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
-        self.fields['bio'].widget.attrs.update({'class': 'form-control'})
-        # self.fields['profile_image'].widget.attrs.update({'class': 'form-control'})
-        self.fields['github'].widget.attrs.update({'class': 'form-control'})
-        self.fields['instagram'].widget.attrs.update({'class': 'form-control'})
-        self.fields['linkedin'].widget.attrs.update({'class': 'form-control'})
-        self.fields['twitter'].widget.attrs.update({'class': 'form-control'})
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control'}),
+            'github': forms.TextInput(attrs={'class': 'form-control', }),
+            'instagram': forms.TextInput(attrs={'class': 'form-control'}),
+            'linkedin': forms.TextInput(attrs={'class': 'form-control'}),
+            'twitter': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('bio', 'profile_image', 'github', 'instagram', 'linkedin', 'twitter')
+
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control'}),
+            'github': forms.TextInput(attrs={'class': 'form-control', }),
+            'instagram': forms.TextInput(attrs={'class': 'form-control'}),
+            'linkedin': forms.TextInput(attrs={'class': 'form-control'}),
+            'twitter': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class EditSettingsForm(UserChangeForm):
@@ -56,11 +58,6 @@ class EditSettingsForm(UserChangeForm):
         'class': 'form-control'}))
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control'}))
-
-    # is_staff = forms.CharField(max_length=100, widget=forms.CheckboxInput(attrs={
-    #     'class': 'form-check'}))
-    # is_superuser = forms.CharField(max_length=100, widget=forms.CheckboxInput(attrs={
-    #     'class': 'form-check'}))
 
     class Meta:
         model = User

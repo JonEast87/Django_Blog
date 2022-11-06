@@ -3,9 +3,21 @@ from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 
-from .forms import SignupForm, PasswordUpdateForm, EditSettingsForm, EditProfileForm
+from .forms import SignupForm, PasswordUpdateForm, EditSettingsForm, EditProfileForm, \
+    CreateProfileForm
+
+
+class CreateProfilePageView(CreateView):
+    model = Profile
+    template_name = "registration/create_user_profile.html"
+    form_class = CreateProfileForm
+
+    def form_valid(self, form):
+        # saved user information to make it available for later usage
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class ShowProfilePageView(DetailView):
