@@ -1,3 +1,4 @@
+from JonsBlog.models import Profile
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
@@ -22,6 +23,32 @@ class SignupForm(UserCreationForm):
 
 
 class EditProfileForm(UserChangeForm):
+    bio = forms.Textarea(attrs={'class': 'form-control'})
+    # profile_image = forms.ImageField(widget=forms.ImageField(attrs={'class': 'form-control'}))
+    github = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control'}))
+    instagram = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control'}))
+    linkedin = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control'}))
+    twitter = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control'}))
+
+    class Meta:
+        model = Profile
+        fields = ['bio', 'github', 'instagram', 'linkedin', 'twitter']
+
+    def __init__(self, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.fields['bio'].widget.attrs.update({'class': 'form-control'})
+        # self.fields['profile_image'].widget.attrs.update({'class': 'form-control'})
+        self.fields['github'].widget.attrs.update({'class': 'form-control'})
+        self.fields['instagram'].widget.attrs.update({'class': 'form-control'})
+        self.fields['linkedin'].widget.attrs.update({'class': 'form-control'})
+        self.fields['twitter'].widget.attrs.update({'class': 'form-control'})
+
+
+class EditSettingsForm(UserChangeForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control'}))

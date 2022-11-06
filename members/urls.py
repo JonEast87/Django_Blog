@@ -1,13 +1,13 @@
 from django.urls import path
 
 from . import views
-from .views import UserRegisterView, UserEditView, PasswordsChangeView, ShowProfilePageView, \
+from .views import UserRegisterView, UserEditSettingsView, PasswordsChangeView, ShowProfilePageView, \
     EditProfilePageView
 
 # Using class based url
 urlpatterns = [
     path('register/', UserRegisterView.as_view(), name='register'),
-    path('edit_settings/', UserEditView.as_view(), name='edit_settings'),
+    path('edit_settings/', UserEditSettingsView.as_view(), name='edit_settings'),
     path('password/', PasswordsChangeView.as_view(
         template_name='registration/change-password.html')),
     path('password_success', views.password_success, name="password_success"),

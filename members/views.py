@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import DetailView
 
-from .forms import SignupForm, EditProfileForm, PasswordUpdateForm
+from .forms import SignupForm, PasswordUpdateForm, EditSettingsForm, EditProfileForm
 
 
 class ShowProfilePageView(DetailView):
@@ -35,8 +35,8 @@ class UserRegisterView(generic.CreateView):
     success_url = reverse_lazy('login')
 
 
-class UserEditView(generic.UpdateView):
-    form_class = EditProfileForm
+class UserEditSettingsView(generic.UpdateView):
+    form_class = EditSettingsForm
     template_name = 'registration/edit_settings.html'
     success_url = reverse_lazy('home')
 
@@ -45,7 +45,8 @@ class UserEditView(generic.UpdateView):
 
 
 class EditProfilePageView(generic.UpdateView):
+    form_class = EditProfileForm
     model = Profile
     template_name = 'registration/edit_profile.html'
-    fields = ['bio', 'profile_image', 'github', 'instagram', 'linkedin', 'twitter']
+    # fields = ['bio', 'profile_image', 'github', 'instagram', 'linkedin', 'twitter']
     success_url = reverse_lazy('home')
