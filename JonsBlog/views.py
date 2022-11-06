@@ -79,6 +79,7 @@ class AddPostView(CreateView):
     template_name = 'add_post.html'
 
     def form_valid(self, form):
+        # saved user information to make it available for later usage
         form.instance.author = self.request.user
         return super().form_valid(form)
 
