@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import PostForm, UpdateForm
+from .forms import PostForm, UpdateForm, CommentForm
 from .models import Post, Category
 
 
@@ -82,6 +82,20 @@ class AddPostView(CreateView):
         # saved user information to make it available for later usage
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class AddCommentView(CreateView):
+    model = Post
+    form_class = CommentForm
+    template_name = 'add_comment.html'
+
+    def form_valid(self, form):
+        # saved user information to make it available for later usage
+        form.instance.author = self.request.user
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+    success_url = reverse_lazy('home')
 
 
 class AddCategoryView(CreateView):

@@ -3,7 +3,9 @@
 {% block content %}
 
 <h1>Posts</h1>
-
+{% if not object_list %}
+ <div>No blogs posted yet.</div>
+{% else %}
 {% for post in object_list %}
     <ul>
         <li>
@@ -28,7 +30,7 @@
             {{ post.snippet }}
         </li>
     </ul>
-
 {% endfor %}
+{% endif %}
 
 {% endblock %}
