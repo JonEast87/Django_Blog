@@ -1,0 +1,12 @@
+media
+
+db.sqlite3
+
+JonBlog/settings.py
+JonBlog/__pycache__
+
+JonsBlog/migrations
+JonsBlog/__pycache__
+
+members/migrations
+members/__pycache__
