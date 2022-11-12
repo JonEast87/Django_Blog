@@ -3,21 +3,21 @@
 
 {% block content %}
 
-<h1>User Profile...</h1>
+	<h1>User Profile...</h1>
 
-{{ page_user }}
+	{{ page_user }}
 
-<div class="card mb-3">
+	<div class="card mb-3">
   <div class="row no-gutters">
     <div class="col-md-2">
 {% if page_user.profile_image.url %}
-      <img src="{{ page_user.profile_image.url }}"
-           class="card-img"
-           alt="Photo of Jon Eastin.">
+	<img src="{{ page_user.profile_image.url }}"
+	     class="card-img"
+	     alt="Photo of Jon Eastin.">
 {% else %}
-        <img src="{% static 'JonsBlog/images/profile/mr_business.png' %}"
-             class="card-img"
-             alt="Default profile picture.">
+	<img src="{% static 'JonsBlog/images/profile/mr_business.png' %}"
+	     class="card-img"
+	     alt="Default profile picture.">
 {% endif %}
     </div>
     <div class="col-md-10">
