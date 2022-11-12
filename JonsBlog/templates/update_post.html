@@ -4,14 +4,14 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-{% if user.id == post.author.id %}
-        <h1>Edit Post...</h1>
+	{% if user.is_authenticated %}
+		{% if user.id == post.author.id %}
+			<h1>Edit Post...</h1>
 
-        <br/>
-        <br/>
+			<br/>
+			<br/>
 
-        <div class="form-group">
+			<div class="form-group">
             <form method="POST">
                 {% csrf_token %}
                 {{ form.media }}
@@ -19,15 +19,15 @@
                 <button class="btn btn-primary">UPDATE</button>
             </form>
         </div>
-{% else %}
-    <div class="">
+		{% else %}
+			<div class="">
 		<p>You are not permitted to edit this post.</p>
 	</div>
-{% endif %}
-{% else %}
-	<div class="">
+		{% endif %}
+	{% else %}
+		<div class="">
 		<p>Please register and/or login, so you can edit posts.</p>
 	</div>
-{% endif %}
+	{% endif %}
 
 {% endblock %}

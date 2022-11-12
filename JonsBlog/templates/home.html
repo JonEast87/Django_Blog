@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<h1>Posts</h1>
-{% if not object_list %}
- <div>No blogs posted yet.</div>
-{% else %}
-{% for post in object_list %}
-    <ul>
+	<h1>Posts</h1>
+	{% if not object_list %}
+		<div>No blogs posted yet.</div>
+	{% else %}
+		{% for post in object_list %}
+			<ul>
         <li>
             <a href="{% url 'article-detail' post.pk %}">
 				{{ post.title }}
@@ -18,19 +18,19 @@
 			</a>
             - {{ post.author.first_name }}
             {{ post.author.last_name }}
-			{% if user.is_authenticated %}
-                {% if user.id == post.author.id %}
-				- <small>
+	        {% if user.is_authenticated %}
+		        {% if user.id == post.author.id %}
+			- <small>
 					<a href="{% url 'update-post' post.pk %}">(Edit)</a>
 					<a href="{% url 'delete-post' post.pk %}">(Delete)</a>
 				</small>
-                {% endif %}
-			{% endif %}
-			<br/>
+		        {% endif %}
+	        {% endif %}
+	        <br/>
             {{ post.snippet }}
         </li>
     </ul>
-{% endfor %}
-{% endif %}
+		{% endfor %}
+	{% endif %}
 
 {% endblock %}

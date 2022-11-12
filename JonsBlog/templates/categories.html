@@ -2,25 +2,25 @@
 
 {% block content %}
 
-<h1>Category: {{ cats }}</h1>
+	<h1>Category: {{ cats }}</h1>
 
-<ul>
+	<ul>
 {% for post in category_posts %}
 
-        <li>
+	<li>
             <a href="{% url 'article-detail' post.pk %}">
 				{{ post.title }}
 			</a>
 			- {{ post.category }}
             - {{ post.author.first_name }}
             {{ post.author.last_name }}
-			{% if user.is_authenticated %}
-				- <small>
+		{% if user.is_authenticated %}
+			- <small>
 					<a href="{% url 'update-post' post.pk %}">(Edit)</a>
 					<a href="{% url 'delete-post' post.pk %}">(Delete)</a>
 				</small>
-			{% endif %}
-			<br />
+		{% endif %}
+		<br/>
 
             {{ post.body|slice:":200"|safe }}
         </li>

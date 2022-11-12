@@ -4,13 +4,13 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-    <h1>Add Comment...</h1>
+	{% if user.is_authenticated %}
+		<h1>Add Comment...</h1>
 
-    <br/>
-    <br/>
+		<br/>
+		<br/>
 
-    <div class="form-group">
+		<div class="form-group">
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
@@ -18,10 +18,10 @@
         </form>
     </div>
 
-{% else %}
-    <div class="">
+	{% else %}
+		<div class="">
         <p>Please register and/or login, so you can create comments.</p>
     </div>
-{% endif %}
+	{% endif %}
 
 {% endblock %}
