@@ -4,106 +4,89 @@
 {% block title %}{{ post.title_tag }}{% endblock %}
 
 {% block content %}
+    <section class="section">
+        <div class="container block is-fluid">
+            <p class="title is-1 is-spaced">{{ post.title }}</p>
+            <p class="subtitle is-3">{{ post.title_tag }}</p>
 
-    <h1>{{ post.title }}</h1>
-    <small>
-        By
-        {{ post.author.first_name }}
-        |
-        {{ post.publication_date }}
-        at
-        {{ post.publication_time }}
-    </small>
-    <br/>
-    <hr>
-    <br/>
-    <p>
-        {% if post.header_image %}
-            <img src="{{ post.header_image.url }}">
-        {% endif %}
-        {{ post.body|safe }}
-    </p>
+            <figure class="image is-128x128">
+                {% if post.header_image %}
+                    <img src="{{ post.header_image.url }}">
+                {% endif %}
+            </figure>
+        </div>
 
-    <br/>
-    {% if user.is_authenticated %}
-        {% if user.id == post.author.id %}
-            <a href="{% url 'update-post' post.pk %}" class="btn btn-primary">
-                EDIT
-            </a>
-            <a href="{% url 'delete-post' post.pk %}" class="btn btn-warning">
-                DELETE
-            </a>
-        {% endif %}
-    {% endif %}
-    <a href="{% url 'home' %} " class="btn btn-secondary">BACK</a>
-
-    <br/>
-    <hr>
-    <br/>
-
-    <div class="card mb-3">
-        <div class="row g-0">
-            <div class="col-md-2">
-                <img src="{{ post.author.profile.profile_image.url }}"
-                     class="img-fluid rounded-start"
-                     alt="Photo of Jon Eastin">
-            </div>
-            <div class="col-md-10">
-                <div class="card-body">
-                    <p class="small text-muted">
-                        <a href="{% url 'show_profile' post.author.profile.id %}">Profile</a> ||
-                        <a href="{{ post.author.profile.github }}">GitHub</a> ||
-                        <a href="{{ post.author.profile.instagram }}">Instagram</a> ||
-                        <a href="{{ post.author.profile.linkedin }}">LinkedIn</a> ||
-                        <a href="{{ post.author.profile.twitter }}">Twitter</a>
-                    </p>
-                    <h5 class="card-title">{{ post.author.first_name }} {{ post.author.last_name }}</h5>
-                    <p class="card-text">{{ post.author.profile.bio }}</p>
-                </div>
+        <div class="container block is-fluid">
+            <p class="subtitle is-5">
+                By {{ post.author.first_name }} || {{ post.publication_date }} at {{ post.publication_time }}
+            </p>
+            <div class="content is-medium">
+                {{ post.body|safe }}
             </div>
         </div>
-    </div>
 
-    <br/>
-    <hr>
-    <br/>
+        <div class="container block is-fluid">
+            {% if user.is_authenticated %}
+                {% if user.id == post.author.id %}
+                    <a href="{% url 'update-post' post.pk %}" class="button is-primary is-rounded">
+                        EDIT
+                    </a>
+                    <a href="{% url 'delete-post' post.pk %}" class="button is-danger is-rounded">
+                        DELETE
+                    </a>
+                {% endif %}
+            {% endif %}
+            <a href="{% url 'home' %} " class="button button-secondary is-rounded">BACK</a>
+        </div>
 
-    {% if user.is_authenticated %}
-        <form action="{% url 'like-post' post.pk %}" method="POST">
-        {% csrf_token %}
+        <div class="container block is-fluid">
+            {% if user.is_authenticated %}
+                <form action="{% url 'like-post' post.pk %}" method="POST">
+                {% csrf_token %}
 
-        {% if liked %}
-            <button type="submit" name="post_id" value="{{ post.id }}"
-                    class="btn btn-secondary btn-sm">
-                UNLIKE
-            </button>
-        {% else %}
-            <button type="submit" name="post_id" value="{{ post.id }}"
-                    class="btn btn-secondary btn-sm">
-                LIKE
-            </button>
-        {% endif %}
-    {% endif %}
-- {{ total_likes }} | Likes
-</form>
+                {% if liked %}
+                    <button type="submit" name="post_id" value="{{ post.id }}"
+                            class="button is-danger is-light is-rounded">
+                        UNLIKE
+                    </button>
+                {% else %}
+                    <button type="submit" name="post_id" value="{{ post.id }}"
+                            class="button is-primary is-light is-rounded">
+                        LIKE
+                    </button>
+                {% endif %}
+            {% endif %}
+            - {{ total_likes }} | Likes
+            </form>
+        </div>
 
-    <br/>
-    <hr>
-    <br/>
+    </section>
 
-    <h2>Comments...</h2>
-    <a href="{% url 'add_comment' post.pk %}">Add A Comment</a>
-    <br/>
-    <hr>
-    {% if not post.comments.all %}
-        No Comments Yet...
-    {% else %}
-        {% for comment in post.comments.all %}
-            <strong>{{ comment.name }} - {{ comment.date_added }}</strong>
-            <br/>
-            {{ comment.body }}
-            <hr>
-        {% endfor %}
-    {% endif %}
+    <section class="section">
+        <div class="container block is-fluid">
+            <div class="box">
+                <label class="label">Create a comment</label>
+                <a href="{% url 'add_comment' post.pk %}">Add A Comment</a>
+            </div>
+
+            {% if not post.comments.all %}
+                No Comments Yet...
+            {% else %}
+                {% for comment in post.comments.all %}
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <strong>{{ comment.name }}</strong> <small>{{ comment.date_added }}</small>
+                                    <br/>
+                                    <p>{{ comment.body }}</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </section>
 
 {% endblock %}

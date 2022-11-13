@@ -3,38 +3,61 @@
 
 {% block content %}
 
-	<h1>User Profile...</h1>
+    <h1>User Profile...</h1>
 
-	{{ page_user }}
+    {{ page_user }}
 
-	<div class="card mb-3">
-  <div class="row no-gutters">
-    <div class="col-md-2">
-{% if page_user.profile_image.url %}
-	<img src="{{ page_user.profile_image.url }}"
-	     class="card-img"
-	     alt="Photo of Jon Eastin.">
-{% else %}
-	<img src="{% static 'JonsBlog/images/profile/mr_business.png' %}"
-	     class="card-img"
-	     alt="Default profile picture.">
-{% endif %}
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                {% if page_user.profile_image.url %}
+                    <img src="{{ page_user.profile_image.url }}"
+                         class="card-img"
+                         alt="Photo of Jon Eastin.">
+                {% else %}
+                    <img src="{% static 'JonsBlog/images/profile/mr_business.png' %}"
+                         class="card-img"
+                         alt="Default profile picture.">
+                {% endif %}
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <p class="small text-muted">
+
+                        <a href="{{ page_user.github }}">GitHub</a> ||
+                        <a href="{{ page_user.instagram }}">Instagram</a> ||
+                        <a href="{{ page_user.linkedin }}">LinkedIn</a> ||
+                        <a href="{{ page_user.twitter }}">Twitter</a>
+                    </p>
+                    <h5 class="card-title">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h5>
+                    <p class="card-text">{{ page_user.bio }}</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-10">
-      <div class="card-body">
-          <p class="small text-muted">
 
-              <a href="{{ page_user.github }}">GitHub</a> ||
-              <a href="{{ page_user.instagram }}">Instagram</a> ||
-              <a href="{{ page_user.linkedin }}">LinkedIn</a> ||
-              <a href="{{ page_user.twitter }}">Twitter</a>
-          </p>
-        <h5 class="card-title">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h5>
-        <p class="card-text">{{ page_user.bio }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-
+{#    <div class="columns is-left">#}
+{#        <div class="column is-one-third">#}
+{#            <div class="card">#}
+{#                <div class="card-content">#}
+{#                    <p class="title">{{ post.author.first_name }} {{ post.author.last_name }}</p>#}
+{#                    <p class="card-subtitle">{{ post.author.profile.bio }}</p>#}
+{##}
+{#                    <div class="card-image">#}
+{#                        <figure class="image is-4by3">#}
+{#                            <img src="{{ post.author.profile.profile_image.url }}" alt="Photo of Jon Eastin">#}
+{#                        </figure>#}
+{#                    </div>#}
+{#                    <footer class="card-footer">#}
+{#                        <a class="card-footer-item" href="{% url 'show_profile' post.author.profile.id %}">Profile</a>#}
+{#                        <a class="card-footer-item" href="{{ post.author.profile.github }}">GitHub</a>#}
+{#                        <a class="card-footer-item" href="{{ post.author.profile.instagram }}">Instagram</a>#}
+{#                        <a class="card-footer-item" href="{{ post.author.profile.linkedin }}">LinkedIn</a>#}
+{#                        <a class="card-footer-item" href="{{ post.author.profile.twitter }}">Twitter</a>#}
+{#                    </footer>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 
 {% endblock %}
