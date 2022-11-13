@@ -6,16 +6,24 @@
 
     {% if user.is_authenticated %}
 
-        <h1>Add Category...</h1>
+        <h2 class="title is-2">Add Category...</h2>
 
         <br/>
         <br/>
 
-        <div class="form-group">
+        <div class="field">
             <form method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-primary">CREATE</button>
+{#                {{ form.as_p }}#}
+                <div class="control">
+                    <label class="label">Add Category</label>
+                    <input class="input" type="text" id="id_name" name="name" required>
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+
+                <button class="button is-link">Submit</button>
             </form>
         </div>
 
