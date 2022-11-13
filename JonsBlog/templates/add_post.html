@@ -5,17 +5,35 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <h1>Add Post...</h1>
+        <h2 class="title is-2">Add Post...</h2>
 
-        <br/>
-        <br/>
-
-        <div class="form-group">
+        <div class="field">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.media }}
-                {{ form.as_p }}
-                <button class="btn btn-primary">CREATE</button>
+{#                {{ form.as_p }}#}
+
+                <label class="label">Title</label>
+                <div class="control">
+                    <input class="input is-success" type="text" placeholder="Title">
+                </div>
+
+                <label class="label">Category</label>
+                <div class="select">
+                    <select>
+                        {% for item in cat_menu %}
+                            <option>{{ item }}</option>
+                        {% empty %}
+                            <option>No Categories.</option>
+                        {%  endfor %}
+                    </select>
+                </div>
+
+                <label class="label">Blog Post</label>
+                <div class="control">
+                    <textarea class="textarea" placeholder="Blog entry..."></textarea>
+                </div>
+                <button class="button is-link">Submit</button>
             </form>
         </div>
 
