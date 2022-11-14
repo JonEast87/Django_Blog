@@ -5,23 +5,26 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <h1>Add Comment...</h1>
+        <h2 class="title is-2">Add Comment...</h2>
 
-        <br/>
-        <br/>
+        <form method="POST">
+            {% csrf_token %}
 
-        <div class="form-group">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">{{ form.name }}</div>
+            </div>
+
+            <div class="field">
+                <label class="label">Comment</label>
+                <div class="control">{{ form.body }}</div>
+            </div>
+
                 <button class="btn btn-primary">CREATE</button>
             </form>
-        </div>
 
     {% else %}
-        <div class="">
-            <p>Please register and/or login, so you can create comments.</p>
-        </div>
+        {% include 'authorization.html' %}
     {% endif %}
 
 {% endblock %}

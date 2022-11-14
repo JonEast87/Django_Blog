@@ -38,14 +38,10 @@
                 </form>
             </div>
         {% else %}
-            <div class="">
-                <p>You are not permitted to edit this post.</p>
-            </div>
+            {% include 'authorization.html' %}
         {% endif %}
     {% else %}
-        <div class="">
-            <p>Please register and/or login, so you can edit posts.</p>
-        </div>
+        {% include 'authorization.html' %}
     {% endif %}
 
 {% endblock %}

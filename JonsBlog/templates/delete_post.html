@@ -27,9 +27,7 @@
             </div>
         {% endif %}
     {% else %}
-        <div class="">
-            <p>Please register and/or login, so you can delete posts.</p>
-        </div>
+       {% include 'authorization.html' %}
     {% endif %}
 
 {% endblock %}
