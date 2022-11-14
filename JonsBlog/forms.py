@@ -103,11 +103,25 @@ class UpdateForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+
+    name = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={
+                'class': 'input is-info'
+            }
+        )
+    )
+
+    body = forms.CharField(
+        required=True,
+        widget=forms.widgets.Textarea(
+            attrs={
+                'class': 'textarea is-info'
+            }
+        )
+    )
+
     class Meta:
         model = Comment
         fields = ('name', 'body')
-
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
-        }
