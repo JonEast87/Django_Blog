@@ -18,7 +18,7 @@ class PostForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={
                 'placeholder': 'Title',
-                'class': 'input is-success'
+                'class': 'input is-info'
             }
         )
     )
@@ -38,12 +38,12 @@ class PostForm(forms.ModelForm):
         choices=choice_list,
         widget=forms.widgets.Select(
             attrs={
-                'class': 'select is-rounded'
+                'class': 'select is-info'
             }
         )
     )
 
-    image = forms.FileField(
+    header_image = forms.ImageField(
         required=False,
         widget=forms.widgets.FileInput(
             attrs={
@@ -57,7 +57,7 @@ class PostForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.Textarea(
             attrs={
-                'class': 'textarea is-primary is-rounded',
+                'class': 'textarea is-info',
                 'placeholder': 'Blog entry...'
             }
         )
@@ -65,7 +65,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'title_tag', 'category', 'image', 'body')
+        fields = ('title', 'title_tag', 'category', 'header_image', 'body')
 
 
 class UpdateForm(forms.ModelForm):

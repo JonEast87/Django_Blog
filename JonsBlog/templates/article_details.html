@@ -9,9 +9,9 @@
             <p class="title is-1 is-spaced">{{ post.title }}</p>
             <p class="subtitle is-3">{{ post.title_tag }}</p>
 
-            <figure class="image is-128x128">
+            <figure class="image is-16by9">
                 {% if post.header_image %}
-                    <img src="{{ post.header_image.url }}">
+                    <img class="has-ratio" src="{{ post.header_image.url }}">
                 {% endif %}
             </figure>
         </div>

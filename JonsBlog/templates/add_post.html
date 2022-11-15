@@ -9,7 +9,6 @@
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.media }}
 
             <div class="field">
                 <label class="label">Title</label>
@@ -36,11 +35,8 @@
 
             <div class="file">
                 <label class="file-label">
-                    {{ form.image }}
+                    {{ form.header_image }}
                     <span class="file-cta">
-                      <span class="file-icon">
-                        <i class="fas fa-upload"></i>
-                      </span>
                       <span class="file-label">
                           Upload your image...
                       </span>
