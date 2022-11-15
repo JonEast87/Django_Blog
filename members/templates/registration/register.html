@@ -1,20 +1,59 @@
 {% extends 'base.html' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register...{% endblock %}
 
 {% block content %}
 
-	<h1>Register...</h1>
+    <h1 class="title is-1">Register...</h1>
 
-	<br/>
-	<br/>
+    <form method="POST">
+        {% csrf_token %}
 
-	<div class="form-group">
-	<form method="POST">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<button class="btn btn-primary">REGISTER</button>
-	</form>
-</div>
+        <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.username }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Firstname</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.first_name }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Lastname</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.last_name }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.email }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.password1 }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Confirm Password</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.password2 }}
+            </div>
+        </div>
+
+
+        <button class="button is-info">Register Account</button>
+    </form>
+
 
 {% endblock %}

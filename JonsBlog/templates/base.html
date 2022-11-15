@@ -1,76 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-        <title>{% block title %}EVERYDAY_JON{% endblock %}</title>
-    </head>
-    <body>
-        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="{% url 'home' %}">EVERYDAY_CODER</a>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>{% block title %}EVERYDAY_JON{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'home' %}">EVERYDAY_CODER</a>
 
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBurger">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBurger">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
 
-            <div class="navbar-menu" id="navbarMenu">
+    <div class="navbar-menu" id="navbarMenu">
 
-                {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
 
-                <div class="navbar-start">
-                    <a class="navbar-item" href="{% url 'add-post' %}">Add Post</a>
-                    <a class="navbar-item" href="{% url 'add-category' %}">Add Category</a>
-                    <div class="navbar-item has-dropdown is-hoverable">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'add-post' %}">Add Post</a>
+                <a class="navbar-item" href="{% url 'add-category' %}">Add Category</a>
+                <div class="navbar-item has-dropdown is-hoverable">
 
                     {% if user.profile.id %}
 
                         <a class="navbar-link is-arrowless">Profile</a>
                         <div class="navbar-dropdown is-boxed">
-                            <a class="navbar-item" href="{% url 'show_profile' user.profile.id %}">Show Profile</a>
-                            <a class="navbar-item" href="{% url 'edit_profile' user.profile.id %}">Edit Profile</a>
+                        <a class="navbar-item" href="{% url 'show_profile' user.profile.id %}">Show Profile</a>
+                        <a class="navbar-item" href="{% url 'edit_profile' user.profile.id %}">Edit Profile</a>
 
-                            {% else %}
+                    {% else %}
+                        <a class="navbar-link is-arrowless">Profile</a>
+                        <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="{% url 'create_profile' %}">Create Profile</a>
 
-                            <a class="navbar-item" href="{% url 'create_profile' %}">Create Profile</a>
+                    {% endif %}
 
-                            {% endif %}
-
-                            <a class="navbar-item" href="{% url 'edit_settings' %}">Edit Settings</a>
-                            <hr class="navbar-divider">
-                            <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
-                        </div>
+                    <a class="navbar-item" href="{% url 'edit_settings' %}">Edit Settings</a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
                     </div>
                 </div>
-
-                {% else %}
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-white" href="{% url 'register' %}">Register</a>
-                            <a class="button is-primary" href="{% url 'login' %}">Login</a>
-                        </div>
-                    </div>
-                </div>
-
-                {% endif %}
-
             </div>
-        </nav>
-    <br/>
-    <section class="section">
-        <div class="container">
 
-            {% block content %}
+        {% else %}
 
-            {% endblock %}
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-white" href="{% url 'register' %}">Register</a>
+                        <a class="button is-primary" href="{% url 'login' %}">Login</a>
+                    </div>
+                </div>
+            </div>
 
-        </div>
-    </section>
-    </body>
+        {% endif %}
+
+    </div>
+</nav>
+<br/>
+<section class="section">
+    <div class="container">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+</section>
+</body>
 </html>
