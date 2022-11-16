@@ -75,9 +75,14 @@
                 {% for comment in post.comments.all %}
                     <div class="box">
                         <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-64x64">
+                                    <img src="{{ comment.author.profile_image }}">
+                                </figure>
+                            </div>
                             <div class="media-content">
                                 <div class="content">
-                                    <strong>{{ comment.name }}</strong> <small>{{ comment.date_added }}</small>
+                                    <strong>{{ comment.author }}</strong> <small>{{ comment.date_added }}</small>
                                     <br/>
                                     <p>{{ comment.body }}</p>
                                 </div>

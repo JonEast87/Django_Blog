@@ -23,28 +23,28 @@
         {% if user.is_authenticated %}
 
             <div class="navbar-start">
-                <a class="navbar-item" href="{% url 'add-post' %}">Add Post</a>
-                <a class="navbar-item" href="{% url 'add-category' %}">Add Category</a>
-                <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-item" href="{% url 'add-post' %}">Add Post</a>
+            <a class="navbar-item" href="{% url 'add-category' %}">Add Category</a>
+            <div class="navbar-item has-dropdown is-hoverable">
 
-                    {% if user.profile.id %}
+                {% if user.profile.id %}
 
-                        <a class="navbar-link is-arrowless">Profile</a>
-                        <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="{% url 'show_profile' user.profile.id %}">Show Profile</a>
-                        <a class="navbar-item" href="{% url 'edit_profile' user.profile.id %}">Edit Profile</a>
+                    <a class="navbar-link is-arrowless">{{ user.first_name }}</a>
+                    <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" href="{% url 'show_profile' user.profile.id %}">Show Profile</a>
+                    <a class="navbar-item" href="{% url 'edit_profile' user.profile.id %}">Edit Profile</a>
 
-                    {% else %}
-                        <a class="navbar-link is-arrowless">Profile</a>
-                        <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="{% url 'create_profile' %}">Create Profile</a>
+                {% else %}
+                    <a class="navbar-link is-arrowless">Profile</a>
+                    <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" href="{% url 'create_profile' %}">Create Profile</a>
 
-                    {% endif %}
+                {% endif %}
 
-                    <a class="navbar-item" href="{% url 'edit_settings' %}">Edit Settings</a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
-                    </div>
+                <a class="navbar-item" href="{% url 'edit_settings' %}">Edit Settings</a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+                </div>
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
             </div>
 
         {% endif %}
-
+        </div>
     </div>
 </nav>
 <br/>

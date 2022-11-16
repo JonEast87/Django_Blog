@@ -12,13 +12,12 @@ for item in choices:
 
 
 class PostForm(forms.ModelForm):
-
     title = forms.CharField(
         required=True,
         widget=forms.widgets.TextInput(
             attrs={
                 'placeholder': 'Title',
-                'class': 'input is-info'
+                'class': 'input is-info',
             }
         )
     )
@@ -28,7 +27,7 @@ class PostForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={
                 'placeholder': 'Sub title/Snippet',
-                'class': 'input is-info'
+                'class': 'input is-info',
             }
         )
     )
@@ -38,7 +37,7 @@ class PostForm(forms.ModelForm):
         choices=choice_list,
         widget=forms.widgets.Select(
             attrs={
-                'class': 'select is-info'
+                'class': 'select is-info',
             }
         )
     )
@@ -58,7 +57,7 @@ class PostForm(forms.ModelForm):
         widget=forms.widgets.Textarea(
             attrs={
                 'class': 'textarea is-info',
-                'placeholder': 'Blog entry...'
+                'placeholder': 'Blog entry...',
             }
         )
     )
@@ -69,12 +68,11 @@ class PostForm(forms.ModelForm):
 
 
 class UpdateForm(forms.ModelForm):
-
     title = forms.CharField(
         required=True,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input is-info',
             }
         )
     )
@@ -83,7 +81,7 @@ class UpdateForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input is-info',
             }
         )
     )
@@ -103,25 +101,16 @@ class UpdateForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-
-    name = forms.CharField(
-        required=True,
-        widget=forms.widgets.TextInput(
-            attrs={
-                'class': 'input is-info'
-            }
-        )
-    )
-
     body = forms.CharField(
         required=True,
         widget=forms.widgets.Textarea(
             attrs={
-                'class': 'textarea is-info'
+                'class': 'textarea is-info',
+                'placeholder': 'Comment entry (max of 240 characters)...'
             }
         )
     )
 
     class Meta:
         model = Comment
-        fields = ('name', 'body')
+        fields = ('body',)
