@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    {% if user.is_authenticated %}
+    {% if user.is_staff %}
         {% if user.id == post.author.id %}
             <h1>Delete Post...</h1>
 
