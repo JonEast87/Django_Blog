@@ -11,7 +11,7 @@ from .forms import SignupForm, PasswordUpdateForm, EditSettingsForm, EditProfile
 
 class CreateProfilePageView(CreateView):
     model = Profile
-    template_name = "registration/create_user_profile.html"
+    template_name = 'registration/create_user_profile.html'
     form_class = CreateProfileForm
 
     def form_valid(self, form):
@@ -27,7 +27,7 @@ class ShowProfilePageView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
         page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
-        context["page_user"] = page_user
+        context['page_user'] = page_user
         return context
 
 
@@ -57,8 +57,7 @@ class UserEditSettingsView(generic.UpdateView):
 
 
 class EditProfilePageView(generic.UpdateView):
-    form_class = EditProfileForm
     model = Profile
+    form_class = EditProfileForm
     template_name = 'registration/edit_profile.html'
-    # fields = ['bio', 'profile_image', 'github', 'instagram', 'linkedin', 'twitter']
     success_url = reverse_lazy('home')

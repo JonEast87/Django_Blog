@@ -1,7 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import PostForm, UpdateForm, CommentForm
 from .models import Post, Category
@@ -77,6 +78,13 @@ class AddPostView(CreateView):
     form_class = PostForm
     model = Post
     template_name = 'add_post.html'
+
+    # def get_context_data(self, *args, **kwargs):
+    #     cat_menu = Category.objects.all()
+    #     context = super(AddPostView, self).get_context_data(*args, **kwargs)
+    #
+    #     context["cat_menu"] = cat_menu
+    #     return context
 
     def form_valid(self, form):
         # saved user information to make it available for later usage

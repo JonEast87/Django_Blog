@@ -3,38 +3,44 @@
 
 {% block content %}
 
-	<h1>User Profile...</h1>
+    <h1 class="subtitle is-2 is-spaced">User Profile...</h1>
 
-	{{ page_user }}
+    <div class="card is-center">
+      <div class="card-image">
+        <figure class="image is-fullwidth">
+          <img src="{{ page_user.profile_image.url }}" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="{{ page_user.profile_image.url }}" alt="Avatar">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">{{ page_user.user }}</p>
+            <a class="subtitle is-6" href="{{ page_user.twitter }}">@{{ page_user.twitter }}</a>
+          </div>
+        </div>
 
-	<div class="card mb-3">
-  <div class="row no-gutters">
-    <div class="col-md-2">
-{% if page_user.profile_image.url %}
-	<img src="{{ page_user.profile_image.url }}"
-	     class="card-img"
-	     alt="Photo of Jon Eastin.">
-{% else %}
-	<img src="{% static 'JonsBlog/images/profile/mr_business.png' %}"
-	     class="card-img"
-	     alt="Default profile picture.">
-{% endif %}
-    </div>
-    <div class="col-md-10">
-      <div class="card-body">
-          <p class="small text-muted">
+        <div class="content">
+          {{ page_user.bio }} <a href="{{ page_user.linkedin }}">@LinkedIn</a>.
 
-              <a href="{{ page_user.github }}">GitHub</a> ||
-              <a href="{{ page_user.instagram }}">Instagram</a> ||
-              <a href="{{ page_user.linkedin }}">LinkedIn</a> ||
-              <a href="{{ page_user.twitter }}">Twitter</a>
-          </p>
-        <h5 class="card-title">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h5>
-        <p class="card-text">{{ page_user.bio }}</p>
+        </div>
+          <footer class="card-footer">
+            <p class="card-footer-item">
+              <span>
+                View on <a href="{{ page_user.github }}">Github</a>
+              </span>
+            </p>
+            <p class="card-footer-item">
+              <span>
+                Share on <a href="{{ page_user.instagram }}">Instagram</a>
+              </span>
+            </p>
+          </footer>
       </div>
     </div>
-  </div>
-</div>
-
 
 {% endblock %}

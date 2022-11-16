@@ -1,28 +1,62 @@
 {% extends 'base.html' %}
 
-{% block title %}Edit Profile{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
 
-	{% if user.is_authenticated %}
-		{% if user.id == profile.user.id %}
-			<h1>Edit Profile...</h1>
+    {% if user.is_authenticated %}
+        {% if user.id == profile.user.id %}
+            <h1 class="title is-1">Edit Profile...</h1>
 
-			<br/>
-			<br/>
 
-			<div class="form-group">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-primary">UPDATE</button>
+
+                <div class="field">
+                    <label class="label">Bio</label>
+                    <div class="control has-icons-left has-icons-right">
+                        {{ form.bio }}
+                    </div>
+                </div>
+
+                {{ form.profile_image }}
+
+                <div class="field">
+                    <label class="label">Github Account</label>
+                    <div class="control has-icons-left has-icons-right">
+                        {{ form.github }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Instagram Link</label>
+                    <div class="control has-icons-left has-icons-right">
+                        {{ form.instagram }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">LinkedIn Link</label>
+                    <div class="control has-icons-left has-icons-right">
+                        {{ form.linkedin }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Twitter Link</label>
+                    <div class="control has-icons-left has-icons-right">
+                        {{ form.twitter }}
+                    </div>
+                </div>
+
+                <button class="button is-info">Edit Profile</button>
             </form>
+
+        {% endif %}
+    {% else %}
+        <div class="">
+            <p>You are not authorized.</p>
         </div>
-		{% endif %}
-	{% else %}
-		<div class="">
-        <p>You are not authorized.</p>
-    </div>
-	{% endif %}
+    {% endif %}
 
 {% endblock %}
