@@ -1,9 +1,9 @@
 from django.urls import path
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
 
 from . import views
 from .views import UserRegisterView, UserEditSettingsView, PasswordsChangeView, ShowProfilePageView, \
-    EditProfilePageView, CreateProfilePageView, LoginForm
+    EditProfilePageView, CreateProfilePageView
 
 # Using class based url
 urlpatterns = [
@@ -15,5 +15,5 @@ urlpatterns = [
     path('<int:pk>/profile/', ShowProfilePageView.as_view(), name="show_profile"),
     path('<int:pk>/edit_profile/', EditProfilePageView.as_view(), name="edit_profile"),
     path('create_profile/', CreateProfilePageView.as_view(), name="create_profile"),
-    path('login/', LoginView.as_view(authentication_form=LoginForm)),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

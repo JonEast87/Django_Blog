@@ -4,35 +4,27 @@
 
 {% block content %}
 
-	<h2 class="title is-2">Login...</h2>
+    <h1 class="title is-1">Login...</h1>
 
-	<div class="form-group">
-	<form method="POST">
-		{% csrf_token %}
-{#		{{ form.as_p }}#}
+
+    <form method="POST">
+        {% csrf_token %}
 
         <div class="field">
-          <label class="label">Username</label>
-          <div class="control has-icons-left has-icons-right">
-            {{ form.username }}
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-          </div>
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.username }}
+            </div>
         </div>
 
         <div class="field">
-          <label class="label">Password</label>
-          <div class="control has-icons-left has-icons-right">
-            {{ form.password }}
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-          </div>
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.password }}
+            </div>
         </div>
 
-		<button class="btn btn-primary">Signin</button>
-	</form>
-</div>
+        <button class="btn btn-primary">Signin</button>
+    </form>
 
 {% endblock %}
