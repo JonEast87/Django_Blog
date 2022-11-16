@@ -1,28 +1,62 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Create A New Blog Post{% endblock %}
 
 {% block content %}
 
-	{% if user.is_authenticated %}
-		<h1>Add Post...</h1>
+    {% if user.is_authenticated %}
+        <h2 class="title is-2">Add Post...</h2>
 
-		<br/>
-		<br/>
-
-		<div class="form-group">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.media }}
-            {{ form.as_p }}
-            <button class="btn btn-primary">CREATE</button>
-        </form>
-    </div>
 
-	{% else %}
-		<div class="">
-        <p>Please register and/or login, so you can create posts.</p>
-    </div>
-	{% endif %}
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    {{ form.title }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Subtitle</label>
+                <div class="control">
+                    {{ form.title_tag }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Category</label>
+                <div class="control">
+                    <div class="select">
+                        {{ form.category }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="file">
+                <label class="file-label">
+                    {{ form.header_image }}
+                    <span class="file-cta">
+                      <span class="file-label">
+                          Upload your image...
+                      </span>
+                    </span>
+                </label>
+            </div>
+
+            <div class="field">
+                <label class="label">Post</label>
+                <div class="control">
+                    {{ form.body }}
+                </div>
+            </div>
+
+            <button class="button is-link">Submit</button>
+        </form>
+
+
+    {% else %}
+        {% include 'authorization.html' %}
+    {% endif %}
 
 {% endblock %}

@@ -2,35 +2,51 @@
 
 {% block content %}
 
-	<h1>Posts</h1>
-	{% if not object_list %}
-		<div>No blogs posted yet.</div>
-	{% else %}
-		{% for post in object_list %}
-			<ul>
-        <li>
-            <a href="{% url 'article-detail' post.pk %}">
-				{{ post.title }}
-			</a>
-			-
-			<a href="{% url 'category' post.category|slugify %}">
-				{{ post.category }}
-			</a>
-            - {{ post.author.first_name }}
-            {{ post.author.last_name }}
-	        {% if user.is_authenticated %}
-		        {% if user.id == post.author.id %}
-			- <small>
-					<a href="{% url 'update-post' post.pk %}">(Edit)</a>
-					<a href="{% url 'delete-post' post.pk %}">(Delete)</a>
-				</small>
-		        {% endif %}
-	        {% endif %}
-	        <br/>
-            {{ post.snippet }}
-        </li>
-    </ul>
-		{% endfor %}
-	{% endif %}
+    <h1 class="title is-1">Posts</h1>
+    <div class="columns">
+        <div class="column is-two-thirds">
+            {% if not object_list %}
+                <div>No blogs posted yet.</div>
+            {% else %}
+                {% for post in object_list %}
+
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="media">
+
+                                <div class="media-content">
+                                    <p class="title is-4">by > {{ post.author.first_name }} {{ post.author.last_name }}</p>
+                                    <p class="subtitle is-5">{{ post.title_tag }}</p>
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                <p class="subtitle is-6">in > {{ post.category }}</p>
+                                <a href="{% url 'article-detail' post.pk %}">#link</a> <a href="#">#{{ post.category }}</a>
+                                <br>
+                                <time datetime="xxxx-xx-xx">{{ post.publication_date }} {{ post.publication_time }}</time>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="column is-one-third">
+            {% if not cat_menu %}
+                <div>No Categories</div>
+            {% else %}
+                <nav class="panel">
+                    <p class="panel-heading">Categories</p>
+                {% for category in cat_menu %}
+                    <a class="panel-block" href="{% url 'category' category|slugify %}">
+                        {{ category }}
+                    </a>
+                {% endfor %}
+                </nav>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
