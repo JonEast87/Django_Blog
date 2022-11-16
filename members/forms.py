@@ -1,49 +1,35 @@
 from JonsBlog.models import Profile
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 
 
-class LoginForm(AuthenticationForm):
-    #
-    # username = forms.CharField(
-    #     required=True,
-    #     widget=forms.widgets.TextInput(
-    #         attrs={
-    #             'class': 'input is-info',
-    #             'type': 'text',
-    #         }
-    #     )
-    # )
-    #
-    # password = forms.CharField(
-    #     required=True,
-    #     widget=forms.widgets.TextInput(
-    #         attrs={
-    #             'class': 'input is-info',
-    #             'type': 'password',
-    #         }
-    #     )
-    # )
-
-    class Meta:
-        model = User
-        # fields = ('username', 'password')
-
-    def __int__(self, *args, **kwargs):
-        super(LoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'input is-info'})
-        self.fields['password'].widget.attrs.update({'class': 'input is-info'})
-
-
 class SignupForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'input is-info'}))
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'input is-info'
+            }
+        )
+    )
 
-    first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'input is-info'}))
+    first_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'input is-info'
+            }
+        )
+    )
 
-    last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'input is-info'}))
+    last_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'input is-info'
+            }
+        )
+    )
 
     class Meta:
         model = User
@@ -221,14 +207,34 @@ class EditSettingsForm(UserChangeForm):
 
 
 class PasswordUpdateForm(PasswordChangeForm):
-    old_password = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'form-control', 'type': 'password'}))
+    old_password = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'type': 'password'
+            }
+        )
+    )
 
-    new_password1 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'form-control', 'type': 'password'}))
+    new_password1 = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control', 'type': 'password'
+            }
+        )
+    )
 
-    new_password2 = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        'class': 'form-control', 'type': 'password'}))
+    new_password2 = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'type': 'password'
+            }
+        )
+    )
 
     class Meta:
         model = User
