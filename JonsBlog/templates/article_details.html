@@ -6,20 +6,19 @@
 {% block content %}
     <section class="section">
         <div class="widget column is-full">
-            <figure class="image is-16by9">
-                {% if post.header_image %}
-                    <img alt="Article image" class="box" src="{{ post.header_image.url }}">
-                {% endif %}
-            </figure>
-            <br/>
             <div class="card post-card">
+                <h1 class="subtitle is-1 has-text-centered">{{ post.title_tag }}</h1>
+                <figure class="image is-16by9">
+                    {% if post.header_image %}
+                        <img alt="Article image" class="box" src="{{ post.header_image.url }}">
+                    {% endif %}
+                </figure>
                 <header class="post-header card-header">
                     <div class="card-header-title">{{ post.title }}</div>
                     <span class="card-header-author pr-3 pt-3">
                         By {{ post.author.first_name }} {{ post.publication_date }} at {{ post.publication_time }}
                     </span>
                 </header>
-                {#            <h3 class="subtitle is-3">'{{ post.title_tag }}'</h3>#}
 
                 <div class="card-content">
                     <div class="tags-wrapper">
