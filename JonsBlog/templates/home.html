@@ -10,7 +10,7 @@
             {% else %}
                 {% for post in object_list %}
 
-                    <article class="message is-link">
+                    <article class="message is-success">
                         <div class="message-header">
                             <p><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }} {{ post.author.last_name }}</p>
                         </div>
@@ -31,7 +31,7 @@
                 <div>No Categories</div>
             {% else %}
                 <nav class="panel">
-                    <p class="panel-heading">Categories</p>
+                    <p class="panel-heading has-background-link has-text-white-bis">Categories</p>
                     {% for category in cat_menu %}
                         <a class="panel-block" href="{% url 'category' category|slugify %}">
                             {{ category }}
