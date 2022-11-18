@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    {% if user.is_authenticated %}
+    {% if user.is_staff %}
         <h2 class="title is-2">Add Post...</h2>
 
         <form method="POST" enctype="multipart/form-data">

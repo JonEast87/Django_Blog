@@ -55,10 +55,11 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    profile = models.ForeignKey(Profile, related_name='user_comment', on_delete=models.CASCADE, default=1)
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    body = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    body = models.TextField(max_length=240)
     date_added = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '%s - %s' % (self.post.title, self.name)
+        return '%s - %s' % (self.post.title, self.author)
