@@ -11,16 +11,11 @@
             {% csrf_token %}
 
             <div class="field">
-                <label class="label">Name</label>
-                <div class="control">{{ form.name }}</div>
-            </div>
-
-            <div class="field">
                 <label class="label">Comment</label>
                 <div class="control">{{ form.body }}</div>
             </div>
 
-                <button class="btn btn-primary">CREATE</button>
+                <button class="button is-primary">Add Comment</button>
             </form>
 
     {% else %}

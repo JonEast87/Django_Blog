@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    {% if user.is_authenticated %}
+    {% if user.is_staff %}
 
         <h2 class="title is-2">Add Category...</h2>
 
@@ -28,11 +28,7 @@
         </div>
 
     {% else %}
-
-        <div class="">
-            <p>Please register and/or login, so you can create categories.</p>
-        </div>
-
+        {% include 'authorization.html' %}
     {% endif %}
 
 {% endblock %}
