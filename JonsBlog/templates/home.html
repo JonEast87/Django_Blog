@@ -10,24 +10,17 @@
             {% else %}
                 {% for post in object_list %}
 
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="media">
-
-                                <div class="media-content">
-                                    <p class="title is-4">by > {{ post.author.first_name }} {{ post.author.last_name }}</p>
-                                    <p class="subtitle is-5">{{ post.title_tag }}</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                <p class="subtitle is-6">in > {{ post.category }}</p>
-                                <a href="{% url 'article-detail' post.pk %}">#link</a> <a href="#">#{{ post.category }}</a>
-                                <br>
-                                <time datetime="xxxx-xx-xx">{{ post.publication_date }} {{ post.publication_time }}</time>
-                            </div>
+                    <article class="message is-link">
+                        <div class="message-header">
+                            <p><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }} {{ post.author.last_name }}</p>
                         </div>
-                    </div>
+                        <div class="message-body">
+                            <p>{{ post.title_tag }}</p>
+                            <p>#{{ post.category }} #{{ post.author.first_name }}</p>
+                            <br>
+                            <time datetime="xxxx-xx-xx">{{ post.publication_date }} {{ post.publication_time }}</time>
+                        </div>
+                    </article>
 
                     <br>
                 {% endfor %}
@@ -39,11 +32,11 @@
             {% else %}
                 <nav class="panel">
                     <p class="panel-heading">Categories</p>
-                {% for category in cat_menu %}
-                    <a class="panel-block" href="{% url 'category' category|slugify %}">
-                        {{ category }}
-                    </a>
-                {% endfor %}
+                    {% for category in cat_menu %}
+                        <a class="panel-block" href="{% url 'category' category|slugify %}">
+                            {{ category }}
+                        </a>
+                    {% endfor %}
                 </nav>
             {% endif %}
         </div>
