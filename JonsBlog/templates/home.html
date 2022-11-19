@@ -4,6 +4,7 @@
 
     <h1 class="title is-1">Posts</h1>
     <div class="columns">
+
         <div class="column is-two-thirds">
             {% if not object_list %}
                 <div>No blogs posted yet.</div>
@@ -12,7 +13,8 @@
 
                     <article class="message is-success">
                         <div class="message-header">
-                            <p><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> by {{ post.author.first_name }} {{ post.author.last_name }}</p>
+                            <p><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+                                by {{ post.author.first_name }} {{ post.author.last_name }}</p>
                         </div>
                         <div class="message-body">
                             <p>{{ post.title_tag }}</p>
@@ -26,6 +28,7 @@
                 {% endfor %}
             {% endif %}
         </div>
+
         <div class="column is-one-third">
             {% if not cat_menu %}
                 <div>No Categories</div>
