@@ -4,107 +4,110 @@
 {% block title %}{{ post.title_tag }}{% endblock %}
 
 {% block content %}
-    <section class="section">
-        <div class="widget column is-full">
-            <div class="card post-card">
-                <h1 class="subtitle is-1 has-text-centered">{{ post.title_tag }}</h1>
-                <figure class="image is-16by9">
-                    {% if post.header_image %}
-                        <img alt="Article image" class="box" src="{{ post.header_image.url }}">
-                    {% endif %}
-                </figure>
-                <header class="post-header card-header">
-                    <div class="card-header-title">{{ post.title }}</div>
-                    <span class="card-header-author pr-3 pt-3">
+    <div class="columns">
+        <div class="column is-two-thirds">
+            <section class="section">
+                <div class="widget column is-full">
+                    <div class="card post-card">
+                        <h1 class="subtitle is-1 has-text-centered">{{ post.title_tag }}</h1>
+                        <figure class="image is-16by9">
+                            {% if post.header_image %}
+                                <img alt="Article image" class="box" src="{{ post.header_image.url }}">
+                            {% endif %}
+                        </figure>
+                        <header class="post-header card-header">
+                            <div class="card-header-title">{{ post.title }}</div>
+                            <span class="card-header-author pr-3 pt-3">
                         By {{ post.author.first_name }} {{ post.publication_date }} at {{ post.publication_time }}
                     </span>
-                </header>
+                        </header>
 
-                <div class="card-content">
-                    <div class="tags-wrapper">
-                        <div class="tags"></div>
-                    </div>
-                    <div class="content">
-                        {{ post.body|safe }}
-                    </div>
-                </div>
-
-                <div class="card-footer">
-                    {% if user.is_authenticated %}
-                        {% if user.id == post.author.id %}
-                            <div class="card-footer-item">
-                                <a href="{% url 'update-post' post.pk %}" class="button is-primary">
-                                    EDIT
-                                </a>
-                                <a href="{% url 'delete-post' post.pk %}" class="button is-danger">
-                                    DELETE
-                                </a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                    <div class="card-footer-item">
-                        <a href="{% url 'home' %} " class="button button-secondary is-rounded">Return</a>
-                    </div>
-                    <div class="card-footer-item">
-                        {% if user.is_authenticated %}
-                            <form action="{% url 'like-post' post.pk %}" method="POST">
-                            {% csrf_token %}
-
-                            {% if liked %}
-                                <button type="submit" name="post_id" value="{{ post.id }}"
-                                        class="button is-warning is-light">
-                                    UNLIKE
-                                </button>
-                            {% else %}
-                                <button type="submit" name="post_id" value="{{ post.id }}"
-                                        class="button is-success is-light">
-                                    LIKE
-                                </button>
-                            {% endif %}
-                        {% endif %}
-                        <p>- {{ total_likes }} | Likes -</p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="widget column is-full">
-            <div class="box">
-                <label class="label">Create a comment</label>
-                <a href="{% url 'add_comment' post.pk %}">Add A Comment</a>
-            </div>
-
-            {% if not post.comments.all %}
-                <p>No Comments Yet...</p>
-            {% else %}
-                {% for comment in post.comments.all %}
-                    <div class="card post-card">
-                        <div class="post-header card-header">
-                            <div class="card-header-title">
-                                {{ comment.author }}
-                            </div>
-                            <span class="card-header-author pr-3 pt-3"></span>
-                        </div>
                         <div class="card-content">
                             <div class="tags-wrapper">
                                 <div class="tags"></div>
                             </div>
                             <div class="content">
-                                <p>{{ comment.body }}</p>
+                                {{ post.body|safe }}
                             </div>
                         </div>
+
                         <div class="card-footer">
+                            {% if user.is_authenticated %}
+                                {% if user.id == post.author.id %}
+                                    <div class="card-footer-item">
+                                        <a href="{% url 'update-post' post.pk %}" class="button is-primary">
+                                            EDIT
+                                        </a>
+                                        <a href="{% url 'delete-post' post.pk %}" class="button is-danger">
+                                            DELETE
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
                             <div class="card-footer-item">
-                                <span>{{ comment.date_added }}</span>
+                                <a href="{% url 'home' %} " class="button button-secondary is-rounded">Return</a>
+                            </div>
+                            <div class="card-footer-item">
+                                {% if user.is_authenticated %}
+                                    <form action="{% url 'like-post' post.pk %}" method="POST">
+                                    {% csrf_token %}
+
+                                    {% if liked %}
+                                        <button type="submit" name="post_id" value="{{ post.id }}"
+                                                class="button is-warning is-light">
+                                            UNLIKE
+                                        </button>
+                                    {% else %}
+                                        <button type="submit" name="post_id" value="{{ post.id }}"
+                                                class="button is-success is-light">
+                                            LIKE
+                                        </button>
+                                    {% endif %}
+                                {% endif %}
+                                <p>- {{ total_likes }} | Likes -</p>
+                                </form>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </section>
+                </div>
+            </section>
 
+            <section class="section">
+                <div class="widget column is-full">
+                    <div class="box">
+                        <label class="label">Create a comment</label>
+                        <a href="{% url 'add_comment' post.pk %}">Add A Comment</a>
+                    </div>
+
+                    {% if not post.comments.all %}
+                        <p>No Comments Yet...</p>
+                    {% else %}
+                        {% for comment in post.comments.all %}
+                            <div class="card post-card">
+                                <div class="post-header card-header">
+                                    <div class="card-header-title">
+                                        {{ comment.author }}
+                                    </div>
+                                    <span class="card-header-author pr-3 pt-3"></span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="tags-wrapper">
+                                        <div class="tags"></div>
+                                    </div>
+                                    <div class="content">
+                                        <p>{{ comment.body }}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-footer-item">
+                                        <span>{{ comment.date_added }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}

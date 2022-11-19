@@ -3,44 +3,46 @@
 
 {% block content %}
 
-    <h1 class="title is-1 is-spaced">User Profile...</h1>
+    <div class="column">
+        <div class="column is-two-thirds">
+            <h1 class="title is-1 is-spaced">User Profile...</h1>
+            <div class="card is-center">
+                <div class="card-image">
+                    <figure class="image is-fullwidth">
+                        <img src="{{ page_user.profile_image.url }}" alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img src="{{ page_user.profile_image.url }}" alt="Avatar">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">{{ page_user.user }}</p>
+                            <a class="subtitle is-6" href="{{ page_user.twitter }}">@{{ page_user.twitter }}</a>
+                        </div>
+                    </div>
 
-    <div class="card is-center">
-      <div class="card-image">
-        <figure class="image is-fullwidth">
-          <img src="{{ page_user.profile_image.url }}" alt="Placeholder image">
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="{{ page_user.profile_image.url }}" alt="Avatar">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4">{{ page_user.user }}</p>
-            <a class="subtitle is-6" href="{{ page_user.twitter }}">@{{ page_user.twitter }}</a>
-          </div>
-        </div>
+                    <div class="content">
+                        {{ page_user.bio }} <a href="{{ page_user.linkedin }}">@LinkedIn</a>.
 
-        <div class="content">
-          {{ page_user.bio }} <a href="{{ page_user.linkedin }}">@LinkedIn</a>.
-
-        </div>
-          <footer class="card-footer">
-            <p class="card-footer-item">
+                    </div>
+                    <footer class="card-footer">
+                        <p class="card-footer-item">
               <span>
                 View on <a href="{{ page_user.github }}">Github</a>
               </span>
-            </p>
-            <p class="card-footer-item">
+                        </p>
+                        <p class="card-footer-item">
               <span>
                 Share on <a href="{{ page_user.instagram }}">Instagram</a>
               </span>
-            </p>
-          </footer>
-      </div>
+                        </p>
+                    </footer>
+                </div>
+            </div>
+        </div>
     </div>
-
 {% endblock %}
