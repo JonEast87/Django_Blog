@@ -3,23 +3,20 @@
 {% block title %}Comment On a Blog Post{% endblock %}
 
 {% block content %}
+    <div class="columns">
+        <div class="column is-two-thirds">
+            <form method="POST">
+                <h2 class="title is-2">Add Comment...</h2>
+                {% csrf_token %}
 
-    {% if user.is_authenticated %}
-        <h2 class="title is-2">Add Comment...</h2>
-
-        <form method="POST">
-            {% csrf_token %}
-
-            <div class="field">
-                <label class="label">Comment</label>
-                <div class="control">{{ form.body }}</div>
-            </div>
+                <div class="field">
+                    <label class="label">Comment</label>
+                    <div class="control">{{ form.body }}</div>
+                </div>
 
                 <button class="button is-primary">Add Comment</button>
             </form>
 
-    {% else %}
-        {% include 'authorization.html' %}
-    {% endif %}
-
+        </div>
+    </div>
 {% endblock %}

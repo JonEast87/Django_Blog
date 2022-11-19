@@ -3,54 +3,54 @@
 {% block title %}Create A New Blog Post{% endblock %}
 
 {% block content %}
+    <div class="columns">
+        <div class="column is-two-thirds">
+            <form method="POST" enctype="multipart/form-data">
+                <h2 class="title is-2">Add Post...</h2>
+                {% csrf_token %}
 
-    <h2 class="title is-2">Add Post...</h2>
-
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <div class="field">
-            <label class="label">Title</label>
-            <div class="control">
-                {{ form.title }}
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Subtitle</label>
-            <div class="control">
-                {{ form.title_tag }}
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Category</label>
-            <div class="control">
-                <div class="select">
-                    {{ form.category }}
+                <div class="field">
+                    <label class="label">Title</label>
+                    <div class="control">
+                        {{ form.title }}
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="file">
-            <label class="file-label">
-                {{ form.header_image }}
-                <span class="file-cta">
+                <div class="field">
+                    <label class="label">Subtitle</label>
+                    <div class="control">
+                        {{ form.title_tag }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Category</label>
+                    <div class="control">
+                        <div class="select">
+                            {{ form.category }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file">
+                    <label class="file-label">
+                        {{ form.header_image }}
+                        <span class="file-cta">
                       <span class="file-label">
                           Upload your image...
                       </span>
                     </span>
-            </label>
+                    </label>
+                </div>
+
+                <div class="field">
+                    <label class="label">Post</label>
+                    <div class="control">
+                        {{ form.body }}
+                    </div>
+                </div>
+                <button class="button is-primary">Submit</button>
+            </form>
         </div>
-
-        <div class="field">
-            <label class="label">Post</label>
-            <div class="control">
-                {{ form.body }}
-            </div>
-        </div>
-
-        <button class="button is-primary">Submit</button>
-    </form>
-
+    </div>
 {% endblock %}

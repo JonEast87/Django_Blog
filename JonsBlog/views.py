@@ -1,12 +1,12 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.context_processors import request
 from django.urls import reverse_lazy, reverse
 from django.views.generic.list import ListView
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import PostForm, UpdateForm, CommentForm
+from .forms import PostForm, UpdateForm, CommentForm, AddCategory
 from .models import Post, Category
 
 
@@ -24,7 +24,7 @@ class HomeView(ListView):
         return context
 
 
-def LikeView(req, pk):
+def like_view(req, pk):
     # This creates a form and submits the post id to find the matching post id
     # if found it saves it to the table, if not it returns a 404 error
     post = get_object_or_404(Post, id=req.POST.get('post_id'))
@@ -40,14 +40,14 @@ def LikeView(req, pk):
 
 
 # using function for this since retrieving the request is simpler for the function than a class
-def CategoryView(req, cats):
+def category_view(req, cats):
     # db query for categories to store
     category_posts = Post.objects.filter(category=cats.replace('-', ' '))
     return render(req, 'categories.html', {'cats': cats.replace('-', ' '),
                                            'category_posts': category_posts})
 
 
-def CategoryListView(req):
+def category_life_view(req):
     # db query for categories to store
     category_menu_list = Category.objects.all()
     return render(req, 'category_list.html', {'category_menu_list': category_menu_list})
@@ -62,12 +62,12 @@ class ArticleDetailView(DetailView):
         cat_menu = Category.objects.all()
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
 
-        # grabs posts from post_table and assign the returned data to getLikes
-        getLikes = get_object_or_404(Post, id=self.kwargs['pk'])
-        total_likes = getLikes.total_likes()
+        # grabs posts from post_table and assign the returned data to get_likes
+        get_likes = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = get_likes.total_likes()
 
         liked = False
-        if getLikes.likes.filter(id=self.request.user.id).exists():
+        if get_likes.likes.filter(id=self.request.user.id).exists():
             liked = True
 
         context["cat_menu"] = cat_menu
@@ -100,10 +100,16 @@ class AddPostView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class AddCommentView(CreateView):
+class AddCommentView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = CommentForm
     template_name = 'add_comment.html'
+
+    # Backend authentication to ensure user is logged to access page
+    login_url = None
+    permission_denied = ''
+    raise_exception = False
+    redirect_field_name = 'next'
 
     def form_valid(self, form):
         # saved user information to make it available for later usage
@@ -114,19 +120,49 @@ class AddCommentView(CreateView):
     success_url = reverse_lazy('home')
 
 
-class AddCategoryView(CreateView):
-    fields = '__all__'
+class AddCategoryView(LoginRequiredMixin, CreateView):
     model = Category
+    form_class = AddCategory
     template_name = 'add_category.html'
 
+    # # Backend authentication to ensure user is logged to access page
+    login_url = None
+    permission_denied = ''
+    raise_exception = False
+    redirect_field_name = 'next'
 
-class UpdatePostView(UpdateView):
+    def form_valid(self, form):
+        # saved user information to make it available for later usage
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     form_class = UpdateForm
     template_name = 'update_post.html'
 
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 
-class DeletePostView(DeleteView):
+    def handle_no_permission(self):
+        return JsonResponse(
+            {'message': 'Not allowed to edit this post.'}
+        )
+
+
+class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'delete_post.html'
+
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
+
+    def handle_no_permission(self):
+        return JsonResponse(
+            {'message': 'Not allowed to edit this post.'}
+        )
+
     success_url = reverse_lazy('home')
