@@ -67,6 +67,21 @@ class PostForm(forms.ModelForm):
         fields = ('title', 'title_tag', 'category', 'header_image', 'body')
 
 
+class AddCategory(forms.ModelForm):
+    name = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={
+                'class': 'input is-info'
+            }
+        )
+    )
+
+    class Meta:
+        model = Category
+        fields = ('name',)
+
+
 class UpdateForm(forms.ModelForm):
     title = forms.CharField(
         required=True,
