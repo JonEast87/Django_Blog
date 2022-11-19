@@ -5,7 +5,7 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <h1 class="title is-1">Create Profile...</h1>
+        <h1 class="title is-1 is-spaced">Create Profile...</h1>
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
