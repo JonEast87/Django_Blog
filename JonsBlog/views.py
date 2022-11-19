@@ -1,5 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.template.context_processors import request
 from django.urls import reverse_lazy, reverse
 from django.views.generic.list import ListView
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
@@ -74,10 +76,16 @@ class ArticleDetailView(DetailView):
         return context
 
 
-class AddPostView(CreateView):
+class AddPostView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
     template_name = 'add_post.html'
+
+    # Backend authentication to ensure user is logged to access page
+    login_url = None
+    permission_denied = ''
+    raise_exception = False
+    redirect_field_name = 'next'
 
     # def get_context_data(self, *args, **kwargs):
     #     cat_menu = Category.objects.all()
