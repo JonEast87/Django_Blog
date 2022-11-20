@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponseRedirect, JsonResponse
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.template.context_processors import request
 from django.urls import reverse_lazy, reverse
 from django.views.generic.list import ListView
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
@@ -147,9 +147,7 @@ class UpdatePostView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == post.author
 
     def handle_no_permission(self):
-        return JsonResponse(
-            {'message': 'Not allowed to edit this post.'}
-        )
+        raise PermissionDenied()
 
 
 class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -161,8 +159,6 @@ class DeletePostView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == post.author
 
     def handle_no_permission(self):
-        return JsonResponse(
-            {'message': 'Not allowed to edit this post.'}
-        )
+        raise PermissionDenied()
 
     success_url = reverse_lazy('home')

@@ -8,7 +8,7 @@ class SignupForm(UserCreationForm):
     email = forms.EmailField(
         widget=forms.EmailInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input'
             }
         )
     )
@@ -17,7 +17,7 @@ class SignupForm(UserCreationForm):
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input'
             }
         )
     )
@@ -26,7 +26,7 @@ class SignupForm(UserCreationForm):
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input'
             }
         )
     )
@@ -48,7 +48,7 @@ class CreateProfileForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.Textarea(
             attrs={
-                'class': 'textarea is-info',
+                'class': 'textarea',
                 'placeholder': 'Bio entry, max of 255 characters...'
             }
         )
@@ -69,7 +69,7 @@ class CreateProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input'
             }
         )
     )
@@ -79,7 +79,7 @@ class CreateProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input'
             }
         )
     )
@@ -89,7 +89,7 @@ class CreateProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input'
             }
         )
     )
@@ -99,7 +99,7 @@ class CreateProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input'
             }
         )
     )
@@ -114,7 +114,7 @@ class EditProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.Textarea(
             attrs={
-                'class': 'textarea is-success',
+                'class': 'textarea',
             }
         )
     )
@@ -124,7 +124,7 @@ class EditProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-success'
+                'class': 'input'
             }
         )
     )
@@ -134,7 +134,7 @@ class EditProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-success'
+                'class': 'input'
             }
         )
     )
@@ -144,7 +144,7 @@ class EditProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-success'
+                'class': 'input'
             }
         )
     )
@@ -154,7 +154,7 @@ class EditProfileForm(forms.ModelForm):
         required=False,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-success'
+                'class': 'input'
             }
         )
     )
@@ -168,7 +168,7 @@ class EditSettingsForm(UserChangeForm):
     email = forms.EmailField(
         widget=forms.EmailInput(
             attrs={
-                'class': 'input is-success',
+                'class': 'input',
                 'type': 'email'
             }
         )
@@ -178,7 +178,7 @@ class EditSettingsForm(UserChangeForm):
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                'class': 'input is-success'
+                'class': 'input'
             }
         )
     )
@@ -187,7 +187,7 @@ class EditSettingsForm(UserChangeForm):
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                'class': 'input is-success'
+                'class': 'input'
             }
         )
     )
@@ -196,22 +196,22 @@ class EditSettingsForm(UserChangeForm):
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                'class': 'input is-success'
+                'class': 'input'
             }
         )
     )
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
+        fields = ('username', 'first_name', 'last_name', 'email')
 
 
 class PasswordUpdateForm(PasswordChangeForm):
     old_password = forms.CharField(
         max_length=100,
-        widget=forms.TextInput(
+        widget=forms.PasswordInput(
             attrs={
-                'class': 'form-control',
+                'class': 'input',
                 'type': 'password'
             }
         )
@@ -219,18 +219,19 @@ class PasswordUpdateForm(PasswordChangeForm):
 
     new_password1 = forms.CharField(
         max_length=100,
-        widget=forms.TextInput(
+        widget=forms.PasswordInput(
             attrs={
-                'class': 'form-control', 'type': 'password'
+                'class': 'input',
+                'type': 'password'
             }
         )
     )
 
     new_password2 = forms.CharField(
         max_length=100,
-        widget=forms.TextInput(
+        widget=forms.PasswordInput(
             attrs={
-                'class': 'form-control',
+                'class': 'input',
                 'type': 'password'
             }
         )

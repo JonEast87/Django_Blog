@@ -3,57 +3,47 @@
 {% block title %}Create A New Profile{% endblock %}
 
 {% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        <h2 class="subtitle is-2 is-spaced">Create Profile...</h2>
+        {% csrf_token %}
 
-    {% if user.is_authenticated %}
-        <h1 class="title is-1 is-spaced">Create Profile...</h1>
-
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <div class="field">
-                <label class="label">Bio</label>
-                <div class="control has-icons-left has-icons-right">
-                    {{ form.bio }}
-                </div>
+        <div class="field">
+            <label class="label">Bio</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.bio }}
             </div>
-
-            <div class="field">
-                <label class="label">Github Link</label>
-                <div class="control has-icons-left has-icons-right">
-                    {{ form.github }}
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Instagram Link</label>
-                <div class="control has-icons-left has-icons-right">
-                    {{ form.instagram }}
-                </div>
-            </div>
-
-            <div class="field">
-
-                <label class="label">LinkedIn</label>
-
-                <div class="control has-icons-left has-icons-right">
-                    {{ form.linkedin }}
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Twitter Link</label>
-                <div class="control has-icons-left has-icons-right">
-                    {{ form.twitter }}
-                </div>
-            </div>
-
-            <button class="button is-info">Create Profile</button>
-        </form>
-
-    {% else %}
-        <div>
-            <p>Please register and/or login, so you can create a profile.</p>
         </div>
-    {% endif %}
 
+        <div class="field">
+            <label class="label">Github Link</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.github }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Instagram Link</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.instagram }}
+            </div>
+        </div>
+
+        <div class="field">
+
+            <label class="label">LinkedIn</label>
+
+            <div class="control has-icons-left has-icons-right">
+                {{ form.linkedin }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Twitter Link</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.twitter }}
+            </div>
+        </div>
+
+        <button class="button is-info">Create Profile</button>
+    </form>
 {% endblock %}
