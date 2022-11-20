@@ -17,7 +17,7 @@ class PostForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={
                 'placeholder': 'Title',
-                'class': 'input is-info',
+                'class': 'input',
             }
         )
     )
@@ -27,7 +27,7 @@ class PostForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={
                 'placeholder': 'Sub title/Snippet',
-                'class': 'input is-info',
+                'class': 'input',
             }
         )
     )
@@ -37,7 +37,7 @@ class PostForm(forms.ModelForm):
         choices=choice_list,
         widget=forms.widgets.Select(
             attrs={
-                'class': 'select is-info',
+                'class': 'select',
             }
         )
     )
@@ -56,7 +56,7 @@ class PostForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.Textarea(
             attrs={
-                'class': 'textarea is-info',
+                'class': 'textarea',
                 'placeholder': 'Blog entry...',
             }
         )
@@ -72,7 +72,7 @@ class AddCategory(forms.ModelForm):
         required=True,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info'
+                'class': 'input'
             }
         )
     )
@@ -87,7 +87,7 @@ class UpdateForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info',
+                'class': 'input',
             }
         )
     )
@@ -96,7 +96,7 @@ class UpdateForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.TextInput(
             attrs={
-                'class': 'input is-info',
+                'class': 'input',
             }
         )
     )
@@ -105,7 +105,7 @@ class UpdateForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.Textarea(
             attrs={
-                'class': 'textarea is-info',
+                'class': 'textarea',
             }
         )
     )
@@ -120,7 +120,7 @@ class CommentForm(forms.ModelForm):
         required=True,
         widget=forms.widgets.Textarea(
             attrs={
-                'class': 'textarea is-info',
+                'class': 'textarea',
                 'placeholder': 'Comment entry (max of 240 characters)...'
             }
         )

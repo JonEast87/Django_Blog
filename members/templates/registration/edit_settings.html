@@ -3,10 +3,8 @@
 {% block title %}Settings{% endblock %}
 
 {% block content %}
-
-    <h1 class="title is-1 is-spaced">Edit Settings...</h1>
-
     <form method="POST">
+        <h2 class="subtitle is-2 is-spaced">Edit Settings...</h2>
         {% csrf_token %}
 
         <div class="field">
@@ -37,8 +35,29 @@
             </div>
         </div>
 
+        <div class="field">
+            <label class="label">Enter Old Password</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.old_password }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">New Password</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.new_password1 }}
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Retype Password</label>
+            <div class="control has-icons-left has-icons-right">
+                {{ form.new_password2 }}
+            </div>
+        </div>
+
+
+
         <button class="button is-primary">Update Settings</button>
     </form>
-
-
 {% endblock %}

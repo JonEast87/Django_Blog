@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h1 class="subtitle is-2">Category: {{ cats }}</h1>
-
     <ul>
+        <h2 class="subtitle is-2 is-spaced">Category: {{ cats }}</h2>
         {% for post in category_posts %}
-
             <div class="card">
                 <div class="card-content">
                     <div class="media">
@@ -25,8 +22,6 @@
                     </div>
                 </div>
             </div>
-
         {% endfor %}
     </ul>
-
 {% endblock %}
