@@ -3,32 +3,21 @@
 {% block title %}Create A New Blog Category{% endblock %}
 
 {% block content %}
-
-    {% if user.is_staff %}
-
-        <h2 class="title is-2">Add Category...</h2>
-
-        <br/>
-        <br/>
-
-        <div class="field">
+    <div class="columns">
+        <div class="column is-two-thirds">
             <form method="POST">
+                <h2 class="title is-2 is-spaced">Add Category...</h2>
                 {% csrf_token %}
-{#                {{ form.as_p }}#}
-                <div class="control">
-                    <label class="label">Add Category</label>
-                    <input class="input" type="text" id="id_name" name="name" required>
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-user"></i>
-                    </span>
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Add Category</label>
+                        {{ form.name }}
+                    </div>
                 </div>
 
                 <button class="button is-primary">Submit</button>
             </form>
+
         </div>
-
-    {% else %}
-        {% include 'authorization.html' %}
-    {% endif %}
-
+    </div>
 {% endblock %}

@@ -1,48 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h1 class="title is-1">Posts</h1>
     <div class="columns">
-
-        <div class="column is-two-thirds">
-            {% if not object_list %}
-                <div>No blogs posted yet.</div>
-            {% else %}
-                {% for post in object_list %}
-
-                    <article class="message is-success">
-                        <div class="message-header">
-                            <p><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
-                                by {{ post.author.first_name }} {{ post.author.last_name }}</p>
-                        </div>
-                        <div class="message-body">
-                            <p>{{ post.title_tag }}</p>
-                            <p>#{{ post.category }} #{{ post.author.first_name }}</p>
-                            <br>
-                            <time datetime="xxxx-xx-xx">{{ post.publication_date }} {{ post.publication_time }}</time>
-                        </div>
-                    </article>
-
-                    <br>
-                {% endfor %}
-            {% endif %}
+        <div class="column">
+            {% for post in object_list %}
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p class="subtitle is-2"><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+                            by {{ post.author.username }}</p>
+                    </div>
+                    <div class="message-body">
+                        <p class="subtitle is=4">{{ post.title_tag }}</p>
+                        <p>{{ post.body }}</p>
+                        <em>#{{ post.category }} #{{ post.author.first_name }}</em>
+                        <figure class="image is-4by3">
+                            {% if post.header_image %}
+                                <img alt="Article image" class="box" src="{{ post.header_image.url }}">
+                            {% endif %}
+                        </figure>
+                        <br>
+                        <time datetime="xxxx-xx-xx">{{ post.publication_date }} {{ post.publication_time }}</time>
+                    </div>
+                </article>
+            {% endfor %}
         </div>
-
-        <div class="column is-one-third">
-            {% if not cat_menu %}
-                <div>No Categories</div>
-            {% else %}
-                <nav class="panel">
-                    <p class="panel-heading has-background-link has-text-white-bis">Categories</p>
-                    {% for category in cat_menu %}
-                        <a class="panel-block" href="{% url 'category' category|slugify %}">
-                            {{ category }}
-                        </a>
-                    {% endfor %}
-                </nav>
-            {% endif %}
+        <div class="column">
+            <nav class="panel">
+                <p class="panel-heading has-background-primary has-text-black-bis">Categories</p>
+                {% for category in cat_menu %}
+                    <a class="panel-block" href="{% url 'category' category|slugify %}">
+                        {{ category }}
+                    </a>
+                {% endfor %}
+            </nav>
         </div>
     </div>
-
 {% endblock %}
