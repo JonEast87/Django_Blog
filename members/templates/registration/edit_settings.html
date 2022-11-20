@@ -36,26 +36,11 @@
         </div>
 
         <div class="field">
-            <label class="label">Enter Old Password</label>
+            <label class="label">Change Password</label>
             <div class="control has-icons-left has-icons-right">
-                {{ form.old_password }}
+                <a href="{% url 'reset_password' %}">Change</a>
             </div>
         </div>
-
-        <div class="field">
-            <label class="label">New Password</label>
-            <div class="control has-icons-left has-icons-right">
-                {{ form.new_password1 }}
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Retype Password</label>
-            <div class="control has-icons-left has-icons-right">
-                {{ form.new_password2 }}
-            </div>
-        </div>
-
 
 
         <button class="button is-primary">Update Settings</button>
