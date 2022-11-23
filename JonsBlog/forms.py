@@ -1,5 +1,5 @@
 from django import forms
-
+from cloudinary.forms import CloudinaryFileField
 from .models import Post, Category, Comment
 
 
@@ -42,7 +42,7 @@ class PostForm(forms.ModelForm):
         )
     )
 
-    header_image = forms.ImageField(
+    header_image = CloudinaryFileField(
         required=False,
         widget=forms.widgets.FileInput(
             attrs={

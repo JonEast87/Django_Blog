@@ -1,4 +1,5 @@
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -17,7 +18,7 @@ class Category(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
-    profile_image = models.ImageField(null=True, blank=True, upload_to='images/profile/')
+    profile_image = CloudinaryField(null=True, blank=True)
     github = models.CharField(max_length=255, null=True, blank=True)
     instagram = models.CharField(max_length=255, null=True, blank=True)
     linkedin = models.CharField(max_length=255, null=True, blank=True)
@@ -33,7 +34,7 @@ class Profile(models.Model):
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=255, default="Jon's Blog")
-    header_image = models.ImageField(null=True, blank=True, upload_to='images/')
+    header_image = CloudinaryField(null=True, blank=True)
     title_tag = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
