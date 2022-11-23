@@ -4,14 +4,14 @@ from .models import Post, Category, Comment
 
 
 class PostForm(forms.ModelForm):
-    # Retrieves key-value pair
-    choices = Category.objects.all().values_list('name', 'name')
-    # Creating empty list for the categories to be stored in
-    choice_list = []
-    # Pushing each Category into our Python List to send back to the client
-    for item in choices:
-        choice_list.append(item)
-        
+    # # Retrieves key-value pair
+    # choices = Category.objects.all().values_list('name', 'name')
+    # # Creating empty list for the categories to be stored in
+    # choice_list = []
+    # # Pushing each Category into our Python List to send back to the client
+    # for item in choices:
+    #     choice_list.append(item)
+
     title = forms.CharField(
         required=True,
         widget=forms.widgets.TextInput(
@@ -32,9 +32,9 @@ class PostForm(forms.ModelForm):
         )
     )
 
-    category = forms.ChoiceField(
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all().order_by('name'),
         required=True,
-        choices=choice_list,
         widget=forms.widgets.Select(
             attrs={
                 'class': 'select',
