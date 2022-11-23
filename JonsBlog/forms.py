@@ -2,16 +2,16 @@ from django import forms
 
 from .models import Post, Category, Comment
 
-# Retrieves key-value pair
-choices = Category.objects.all().values_list('name', 'name')
-# Creating empty list for the categories to be stored in
-choice_list = []
-# Pushing each Category into our Python List to send back to the client
-for item in choices:
-    choice_list.append(item)
-
 
 class PostForm(forms.ModelForm):
+    # Retrieves key-value pair
+    choices = Category.objects.all().values_list('name', 'name')
+    # Creating empty list for the categories to be stored in
+    choice_list = []
+    # Pushing each Category into our Python List to send back to the client
+    for item in choices:
+        choice_list.append(item)
+        
     title = forms.CharField(
         required=True,
         widget=forms.widgets.TextInput(
