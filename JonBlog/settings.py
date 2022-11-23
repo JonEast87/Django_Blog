@@ -15,6 +15,18 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+load_dotenv()
+
+cloudinary.config(
+    cloud_name=os.getenv('cloud_name'),
+    api_key=os.getenv('api_key'),
+    api_secret=os.getenv('api_secret'),
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,7 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'JonsBlog',
     'members',
-    'ckeditor'
+    'ckeditor',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -78,14 +91,25 @@ WSGI_APPLICATION = 'JonBlog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.getenv('DATABASE_KEY'),
+#         'USER': os.getenv('DATABASE_USER'),
+#         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+#         'HOST': os.getenv('DATABASE_HOST'),
+#         'PORT': os.getenv('DATABASE_PORT'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.getenv('DATABASE_KEY'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'my_db',
+        'USER': 'hero',
+        'PASSWORD': 'my_db@123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -122,10 +146,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]

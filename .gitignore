@@ -7,3 +7,5 @@ JonsBlog/__pycache__
 members/migrations
 members/__pycache__
 /whole.json
+
+.env
