@@ -46,7 +46,7 @@ class PasswordsChangeView(PasswordChangeView):
 
 
 def password_success(request):
-    return render(request, 'registration/reset_password.html', {})
+    return render(request, 'registration/templates/reset_password.html', {})
 
 
 # Create your views here.
