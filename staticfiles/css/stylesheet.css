@@ -1,0 +1,11 @@
+.title, .card-header-title {
+    font-family: Roboto, sans-serif;
+}
+
+.subtitle, .card-header-author {
+    font-family: Lobster, cursive;
+}
+
+p, span, .content, a {
+    font-family: Raleway, sans-serif;
+}
