@@ -1,11 +1,11 @@
-__pycache__
-JonBlog/__pycache__
+.idea
 
-JonsBlog/migrations
-JonsBlog/__pycache__
-
-members/migrations
-members/__pycache__
+__pychache__/
+JonBlog/__pychache__/
+JonsBlog/__pychache__/
+*migrations/
 /whole.json
 
 .env
+env/
+checkstatic
