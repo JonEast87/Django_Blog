@@ -10,8 +10,8 @@
                             by {{ post.author.username }}</p>
                     </div>
                     <div class="message-body">
-                        <p class="subtitle is=4">{{ post.title_tag }}</p>
-                        <p>{{ post.body }}</p>
+                        <p class="subtitle is-4">{{ post.title_tag }}</p>
+                        <p>{{ post.body|safe }}</p>
                         <em>#{{ post.category }} #{{ post.author.first_name }}</em>
                         <figure class="image is-4by3">
                             {% if post.header_image %}
