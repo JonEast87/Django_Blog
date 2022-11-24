@@ -14,7 +14,7 @@ from .models import Post, Category
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
-    ordering = ['-publication_time']
+    ordering = ['publication_time']
 
     # retrieves the data needed to generate a dictionary for the categories dropdown on home.html
     def get_context_data(self, *args, **kwargs):
@@ -76,23 +76,21 @@ class ArticleDetailView(DetailView):
         return context
 
 
-class AddPostView(LoginRequiredMixin, CreateView):
+class AddPostView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = PostForm
     model = Post
     template_name = 'add_post.html'
 
     # Backend authentication to ensure user is logged to access page
-    login_url = None
-    permission_denied = ''
-    raise_exception = False
-    redirect_field_name = 'next'
+    # login_url = None
+    # permission_denied = ''
+    # raise_exception = False
+    # redirect_field_name = 'next'
 
-    # def get_context_data(self, *args, **kwargs):
-    #     cat_menu = Category.objects.all()
-    #     context = super(AddPostView, self).get_context_data(*args, **kwargs)
-    #
-    #     context["cat_menu"] = cat_menu
-    #     return context
+    # Test to check if user is_superuser, if not then display a 403,
+    # this will remain in place until I can decide on if I want anyone posting
+    def test_func(self):
+        return self.request.user.is_superuser
 
     def form_valid(self, form):
         # saved user information to make it available for later usage
@@ -120,16 +118,15 @@ class AddCommentView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('home')
 
 
-class AddCategoryView(LoginRequiredMixin, CreateView):
+class AddCategoryView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Category
     form_class = AddCategory
     template_name = 'add_category.html'
 
-    # # Backend authentication to ensure user is logged to access page
-    login_url = None
-    permission_denied = ''
-    raise_exception = False
-    redirect_field_name = 'next'
+    # Test to check if user is_superuser, if not then display a 403,
+    # this will remain in place until I can decide on if I want just anyone creating categories
+    def test_func(self):
+        return self.request.user.is_superuser
 
     def form_valid(self, form):
         # saved user information to make it available for later usage
