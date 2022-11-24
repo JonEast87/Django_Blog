@@ -55,8 +55,8 @@ INSTALLED_APPS = [
     'JonsBlog',
     'members',
     'ckeditor',
-    'cloudinary',
-    'whitenoise.runserver_nostatic'
+    'whitenoise.runserver_nostatic',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'JonBlog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('DATABASE_KEY'),
         'USER': os.getenv('DATABASE_USER'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
@@ -160,6 +160,12 @@ STATIC_URL = '/static/'
 # ]
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
