@@ -4,7 +4,6 @@ JonBlog/__pycache__/
 JonsBlog/__pycache__/
 __pycache__/
 *migrations/
-/whole.json
 
-checkstatic
+static
 .env

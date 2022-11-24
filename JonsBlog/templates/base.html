@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@300&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
-    <link href="../../checkstatic/static/JonsBlog/css/stylesheet.css" rel="stylesheet">
+{#    <link href="../../static/static/JonsBlog/css/stylesheet.css" rel="stylesheet">#}
     <!-- temp fix until I can figure out how to get static files to load for another directory -->
-    <link href="../../../static/JonsBlog/css/stylesheet.css" rel="stylesheet">
+    <link href="{% static "static/JonsBlog/css/stylesheet.css" %}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2453f003ac.js" crossorigin="anonymous"></script>
     <title>{% block title %}EVERYDAY_JON{% endblock %}</title>
 </head>
