@@ -9,15 +9,29 @@
 
         <div class="field">
             <label class="label">Bio</label>
-            <div class="control has-icons-left has-icons-right">
+            <div class="control">
                 {{ form.bio }}
             </div>
+        </div>
+
+        <div class="file">
+            <label class="file-label">
+                <span class="file-cta">
+                    {{ form.profile_image }}
+                    <span class="file-label">
+                        Profile Image
+                    </span>
+                </span>
+            </label>
         </div>
 
         <div class="field">
             <label class="label">Github Link</label>
             <div class="control has-icons-left has-icons-right">
                 {{ form.github }}
+                <span class="icon is-small is-left">
+                    <i class="fa-brands fa-github"></i>
+                </span>
             </div>
         </div>
 
@@ -25,6 +39,9 @@
             <label class="label">Instagram Link</label>
             <div class="control has-icons-left has-icons-right">
                 {{ form.instagram }}
+                <span class="icon is-small is-left">
+                    <i class="fa-brands fa-instagram"></i>
+                </span>
             </div>
         </div>
 
@@ -34,6 +51,9 @@
 
             <div class="control has-icons-left has-icons-right">
                 {{ form.linkedin }}
+                <span class="icon is-small is-left">
+                    <i class="fa-brands fa-linkedin"></i>
+                </span>
             </div>
         </div>
 
@@ -41,9 +61,12 @@
             <label class="label">Twitter Link</label>
             <div class="control has-icons-left has-icons-right">
                 {{ form.twitter }}
+                <span class="icon is-small is-left">
+                    <i class="fa-brands fa-twitter"></i>
+                </span>
             </div>
         </div>
 
-        <button class="button is-info">Create Profile</button>
+        <button class="button is-info is-outlined is-responsive is-rounded">Create Profile</button>
     </form>
 {% endblock %}

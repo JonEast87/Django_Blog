@@ -4,14 +4,6 @@ from .models import Post, Category, Comment
 
 
 class PostForm(forms.ModelForm):
-    # # Retrieves key-value pair
-    # choices = Category.objects.all().values_list('name', 'name')
-    # # Creating empty list for the categories to be stored in
-    # choice_list = []
-    # # Pushing each Category into our Python List to send back to the client
-    # for item in choices:
-    #     choice_list.append(item)
-
     title = forms.CharField(
         required=True,
         widget=forms.widgets.TextInput(
@@ -101,6 +93,16 @@ class UpdateForm(forms.ModelForm):
         )
     )
 
+    header_image = CloudinaryFileField(
+        required=False,
+        widget=forms.widgets.FileInput(
+            attrs={
+                'class': 'file-input',
+                'type': 'file',
+            }
+        )
+    )
+
     body = forms.CharField(
         required=True,
         widget=forms.widgets.Textarea(
@@ -112,7 +114,7 @@ class UpdateForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'title_tag', 'body')
+        fields = ('title', 'title_tag', 'header_image', 'body')
 
 
 class CommentForm(forms.ModelForm):

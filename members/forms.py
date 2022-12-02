@@ -56,7 +56,7 @@ class CreateProfileForm(forms.ModelForm):
     )
 
     profile_image = CloudinaryFileField(
-        required=True,
+        required=False,
         widget=forms.widgets.FileInput(
             attrs={
                 'class': 'file-input',

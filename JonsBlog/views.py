@@ -14,13 +14,19 @@ from .models import Post, Category
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
-    ordering = ['publication_time']
+    ordering = ['-publication_date', '-publication_time']
 
     # retrieves the data needed to generate a dictionary for the categories dropdown on home.html
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
         context = super(HomeView, self).get_context_data(*args, **kwargs)
+
+        # grabs posts from post_table and assign the returned data to get_likes
+        # get_likes = get_object_or_404(Post, id=self.kwargs['pk'])
+        # total_likes = get_likes.total_likes()
+
         context["cat_menu"] = cat_menu
+        # context["total_likes"] = total_likes
         return context
 
 
@@ -81,12 +87,6 @@ class AddPostView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     template_name = 'add_post.html'
 
-    # Backend authentication to ensure user is logged to access page
-    # login_url = None
-    # permission_denied = ''
-    # raise_exception = False
-    # redirect_field_name = 'next'
-
     # Test to check if user is_superuser, if not then display a 403,
     # this will remain in place until I can decide on if I want anyone posting
     def test_func(self):
@@ -123,8 +123,6 @@ class AddCategoryView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = AddCategory
     template_name = 'add_category.html'
 
-    # Test to check if user is_superuser, if not then display a 403,
-    # this will remain in place until I can decide on if I want just anyone creating categories
     def test_func(self):
         return self.request.user.is_superuser
 

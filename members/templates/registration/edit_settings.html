@@ -11,6 +11,9 @@
             <label class="label">Username</label>
             <div class="control has-icons-left has-icons-right">
                 {{ form.username }}
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
             </div>
         </div>
 
@@ -18,6 +21,9 @@
             <label class="label">Firstname</label>
             <div class="control has-icons-left has-icons-right">
                 {{ form.first_name }}
+                <span class="icon is-small is-left">
+                    <i class="fa-solid fa-signature"></i>
+                </span>
             </div>
         </div>
 
@@ -25,6 +31,9 @@
             <label class="label">Lastname</label>
             <div class="control has-icons-left has-icons-right">
                 {{ form.last_name }}
+                <span class="icon is-small is-left">
+                    <i class="fa-solid fa-signature"></i>
+                </span>
             </div>
         </div>
 
@@ -32,17 +41,20 @@
             <label class="label">Email</label>
             <div class="control has-icons-left has-icons-right">
                 {{ form.email }}
+                <span class="icon is-small is-left">
+                    <i class="fa-solid fa-envelope"></i>
+                </span>
             </div>
         </div>
 
         <div class="field">
             <label class="label">Change Password</label>
             <div class="control has-icons-left has-icons-right">
-                <a href="{% url 'reset_password' %}">Change</a>
+                <a class="button is-black is-outlined is-responsive is-rounded" href="{% url 'reset_password' %}">Change Auth</a>
             </div>
         </div>
 
 
-        <button class="button is-primary">Update Settings</button>
+        <button class="button is-dark is-outlined is-responsive is-rounded">Update Settings</button>
     </form>
 {% endblock %}

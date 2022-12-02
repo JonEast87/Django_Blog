@@ -5,6 +5,5 @@ JonsBlog/__pycache__/
 __pycache__/
 *migrations/
 
-static
 staticfiles
 .env
