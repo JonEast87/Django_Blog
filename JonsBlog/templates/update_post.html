@@ -10,17 +10,30 @@
                 {% csrf_token %}
                 {{ form.media }}
 
-                <div class="">
+                <div class="field">
                     <label class="label">Title</label>
                     <div class="control">
                         {{ form.title }}
                     </div>
                 </div>
 
-                <div class="">
+                <div class="field">
                     <label class="label">Title</label>
                     <div class="control">
                         {{ form.title_tag }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="file">
+                        <label class="file-label">
+                            {{ form.header_image }}
+                            <span class="file-cta">
+                      <span class="file-label">
+                          Upload your image...
+                      </span>
+                    </span>
+                        </label>
                     </div>
                 </div>
 

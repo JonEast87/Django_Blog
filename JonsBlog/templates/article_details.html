@@ -5,9 +5,9 @@
 
 {% block content %}
     <div class="columns">
-        <div class="column is-two-thirds">
+        <div class="column">
             <section class="section">
-                <div class="widget column is-full">
+                <div class="column">
                     <div class="card post-card">
                         <h2 class="subtitle is-2 has-text-centered is-spaced">{{ post.title_tag }}</h2>
                         <figure class="image is-16by9">
@@ -19,7 +19,7 @@
                             <div class="card-header-title">{{ post.title }}</div>
                             <span class="card-header-author pr-3 pt-3">
                         By {{ post.author.first_name }} {{ post.publication_date }} at {{ post.publication_time }}
-                    </span>
+                            </span>
                         </header>
 
                         <div class="card-content">
@@ -35,10 +35,12 @@
                             {% if user.is_authenticated %}
                                 {% if user.id == post.author.id %}
                                     <div class="card-footer-item">
-                                        <a href="{% url 'update-post' post.pk %}" class="button is-primary">
+                                        <a href="{% url 'update-post' post.pk %}"
+                                           class="button has-text-black-bis is-light is-outlined is-responsive is-rounded">
                                             EDIT
                                         </a>
-                                        <a href="{% url 'delete-post' post.pk %}" class="button is-danger">
+                                        <a href="{% url 'delete-post' post.pk %}"
+                                           class="button is-black is-outlined is-responsive is-rounded">
                                             DELETE
                                         </a>
                                     </div>
@@ -54,12 +56,12 @@
 
                                     {% if liked %}
                                         <button type="submit" name="post_id" value="{{ post.id }}"
-                                                class="button is-warning is-light">
+                                                class="button is-dark is-outlined is-responsive is-rounded">
                                             UNLIKE
                                         </button>
                                     {% else %}
                                         <button type="submit" name="post_id" value="{{ post.id }}"
-                                                class="button is-success is-light">
+                                                class="button is-dark is-outlined is-responsive is-rounded">
                                             LIKE
                                         </button>
                                     {% endif %}
@@ -80,7 +82,7 @@
                     </div>
 
                     {% if not post.comments.all %}
-                        <p>No Comments Yet...</p>
+                        <p></p>
                     {% else %}
                         {% for comment in post.comments.all %}
                             <div class="card post-card">

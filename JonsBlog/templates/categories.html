@@ -5,22 +5,26 @@
         <h2 class="subtitle is-2 is-spaced">Category: {{ cats }}</h2>
         {% for post in category_posts %}
             <div class="card">
+                <div class="card-header">
+                    <p class="card-header-title">{{ post.title }}</p>
+                    <p class="card-header-author mt-3 mr-3">by {{ post.author.username }}</p>
+                </div>
+
                 <div class="card-content">
-                    <div class="media">
-
-                        <div class="media-content">
-                            <p class="title is-4">by > {{ post.author.first_name }} {{ post.author.last_name }}</p>
-                            <p class="subtitle is-5">{{ post.title_tag }}</p>
-                        </div>
-                    </div>
-
                     <div class="content">
-                        <p class="subtitle is-6">in > {{ post.category }}</p>
-                        <a href="{% url 'article-detail' post.pk %}">#link</a> <a href="">#{{ post.category }}</a>
-                        <br>
+                        <p class="subtitle is-6 is-spaced">{{ post.title_tag }}</p>
                         <time datetime="2016-1-1">{{ post.publication_date }} {{ post.publication_time }}</time>
                     </div>
                 </div>
+
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <span>
+                        View <a href="{% url 'article-detail' post.pk %}">here</a>
+                        </span>
+                    </p>
+                    <p class="card-footer-item">{{ post.category }}</p>
+                </footer>
             </div>
         {% endfor %}
     </ul>

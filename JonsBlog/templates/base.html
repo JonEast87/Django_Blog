@@ -10,94 +10,80 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Raleway:wght@300&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
-{#    <link href="../../static/static/JonsBlog/css/stylesheet.css" rel="stylesheet">#}
-    <!-- temp fix until I can figure out how to get static files to load for another directory -->
     <link href="{% static "css/stylesheet.css" %}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2453f003ac.js" crossorigin="anonymous"></script>
-    <title>{% block title %}EVERYDAY_JON{% endblock %}</title>
+    <title>{% block title %}Jon Blog IT{% endblock %}</title>
 </head>
-<body>
+<body class="has-navbar-fixed-top">
 <div class="container mt-6">
     <div class="columns">
         <div class="column">
-            <aside class="menu">
-                <p class="menu-label title is-1">
-                    Meower
-                </p>
-                <ul class="menu-list">
-                    <li>
-                        <a href="{% url 'home' %}"><i class="fa-solid fa-cat fa-3x"></i></a>
-                    </li>
-                </ul>
-
-                <p class="menu-label">
-                    Add Content
-                </p>
-                <ul class="menu-list">
-                    <li>
-                        <a href="{% url 'add-post' %}">Add Post</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'add-category' %}">Add Category</a>
-                    </li>
-                </ul>
-                <p class="menu-label">
-                    User Upkeep
-                </p>
-                {% if user.profile.id %}
-                    <ul class="menu-list">
-                        <li>
-                            <p>{{ user.first_name }} Profile</p>
-                            <ul>
-                                <li>
-                                    <a href="{% url 'show_profile' user.profile.id %}">Show Profile</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'edit_profile' user.profile.id %}">Edit Profile</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                {% else %}
-                    <ul class="menu-list">
-                        <li>
-                            <ul>
-                                <li>
-                                    <a href="{% url 'create_profile' %}">Create Profile</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                {% endif %}
-                {% if user.id %}
-                    <p class="menu-label">
-                        Edit Account / Logout
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a href="{% url 'edit_settings' %}">Edit Settings</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'logout' %}">Logout</a>
-                        </li>
-                    </ul>
-                {% else %}
-                    <p class="menu-label">
-                        Register Account / Login
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a href="{% url 'register' %}">Register Account</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'login' %}">Login</a>
-                        </li>
-                    </ul>
-                {% endif %}
-            </aside>
-        </div>
-        <div class="column is-three-quarters">
             <div class="container">
+
+                <nav class="navbar is-fixed-top is-dark is-spaced has-shadow" role="navigation" aria-label="main navigation">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="{% url 'home' %}">
+                            <i class="fa-solid fa-blog fa-3x"></i>
+                        </a>
+
+                        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                           data-target="navbarBasicExample">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                    <div id="navbarBasicExample" class="navbar-menu">
+                        <div class="navbar-start">
+
+                            <a class="navbar-item" href="{% url 'add-post' %}">
+                                Add Post
+                            </a>
+
+                            <a class="navbar-item" href="{% url 'add-category' %}">
+                                Add Category
+                            </a>
+
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link">
+                                    Profile Upkeep
+                                </a>
+                                <div class="navbar-dropdown">
+                                    {% if user.profile.id %}
+
+                                        <a class="navbar-item" href="{% url 'show_profile' user.profile.id %}">Show
+                                            Profile</a>
+
+                                        <hr class="navbar-divider">
+
+                                        <a class="navbar-item" href="{% url 'edit_profile' user.profile.id %}">Edit
+                                            Profile</a>
+
+                                    {% else %}
+
+                                        <a class="navbar-item" href="{% url 'create_profile' %}">Create Profile</a>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="navbar-end">
+                            <div class="navbar-item">
+                                <div class="buttons">
+                                    {% if user.id %}
+                                        <a class="button is-light is-outlined is-responsive" href="{% url 'edit_settings' %}">Settings</a>
+                                        <a class="button is-white is-outlined is-responsive" href="{% url 'logout' %}">Logout</a>
+                                    {% else %}
+                                        <a class="button is-light is-outlined is-responsive" href="{% url 'register' %}">Register</a>
+                                        <a class="button is-white is-outlined is-responsive" href="{% url 'login' %}">Login</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
 
                 {% block content %}
 
@@ -108,12 +94,12 @@
     </div>
 </div>
 
-<footer class="footer mt-auto">
+<footer class="footer mt-6">
     <div class="content has-text-centered">
         <p>
-            <strong>MEOWER</strong> by <a href="#">Jonathan Eastin</a>. The front end is built
-            with <a href="https://bulma.io">Bulma</a>. Backend is made with Python <a
-                href="https://www.djangoproject.com">Django</a>.
+            <strong>Jon Blog IT</strong> by <a href="#">Jonathan Eastin</a>. The front end design by
+            <a href="https://bulma.io">Bulma</a>. Backend is constructed with Python <a
+                href="https://www.djangoproject.com">Django</a>. Database is <a href="https://www.postgresql.org">Postgres</a> and hosting provided via <a href="https://dashboard.heroku.com/apps">Heroku</a>.
         </p>
     </div>
 </footer>
