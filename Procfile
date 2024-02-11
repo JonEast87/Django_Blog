@@ -1,1 +1,0 @@
-web: gunicorn JonBlog.wsgi --log-file -
